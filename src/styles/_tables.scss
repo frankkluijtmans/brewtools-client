@@ -1,0 +1,90 @@
+@import '_variables';
+@import '_mixins';
+
+.OverviewTable {
+    margin-right: 25px;
+    border-radius: 5px;
+    background: $white;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    overflow: hidden;
+
+    header {
+        @include gradient($primary-color, $secondary-color);
+        padding: 15px;
+        color: $white;
+        font-size: $N;
+    }
+
+    footer {
+        padding: 12px 10px;
+        font-size: $N;
+        text-align: right;
+        border-top: 1px solid $light-color;
+    }
+
+    .TableRow {
+        display: flex;
+        flex-direction: row;
+        text-decoration: none;
+
+        &:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        &.TableHeader {
+            font-weight: 600;
+        
+            span {
+                font-weight: 600;
+                border-bottom: 1px solid $light-color;
+
+                i {
+                    font-size: $S;
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        span {
+            flex: 0 0 20%;
+            padding: 12px 10px;
+            display: flex;
+            align-items: center;
+            color: $dark-color;
+
+            &.Buttons {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            &.Flex-25 {
+                flex: 0 0 25%;  
+            }
+
+            &.Flex-33 {
+                flex: 0 0 33.33%;  
+            }
+        }
+    }
+
+    .Button {
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        color: $semidark-color;
+        text-decoration: none;
+        font-size: $SN;
+        cursor: pointer;
+
+        &.Edit {
+            margin-right: 10px;
+        }
+
+        &.New {
+            display: inline-block;
+            padding: 8px 12px;
+            background: $primary-color;
+            color: $white;
+        }
+    }
+}

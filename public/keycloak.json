@@ -1,0 +1,5 @@
+{
+    "authRealm": "Brewtools",
+    "authUrl": "http://localhost:8080/auth",
+    "authClientId": "brewtools-client-dev"
+}

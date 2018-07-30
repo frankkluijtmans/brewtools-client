@@ -1,0 +1,5 @@
+@mixin gradient($from, $to) {    
+	background: $from; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, $from, $to); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, $from, $to);
+}
