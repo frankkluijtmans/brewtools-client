@@ -6,7 +6,7 @@ import VueKeyCloak from '@dsb-norge/vue-keycloak-js'
 Vue.config.productionTip = false
 
 Vue.use(VueKeyCloak, {
-  config: "http://localhost:8081/keycloak.json",
+  config: "http://localhost:8080/keycloak.json",
   onReady: (keycloak) => {
     new Vue({
       router,
