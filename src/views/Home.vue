@@ -31,6 +31,8 @@ export default {
   },
   mounted() {
 
+    axios.post('http://localhost:3000/insert');
+
     axios.get('http://localhost:3000/', {
       headers: {
         "Content-Type": "application/json"

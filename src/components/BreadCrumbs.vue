@@ -1,7 +1,9 @@
 <template>
 	<div id="breadcrumbs">
         <span v-for="page in currentPath" :key=page.name>
-            {{ page.name }}
+            <router-link :to=page.path>
+                {{ page.name }}
+            </router-link>
         </span>
     </div>
 </template>
@@ -30,6 +32,11 @@ export default {
         span {
             position: relative;
             margin-left: 20px;
+
+            a {
+                color: $semidark-color;
+                text-decoration: none;
+            }
 
             &:before {
                 position: absolute;

@@ -2,9 +2,10 @@
 	<nav id="main-navigation">
 		<header class="NavigationHeading">Breweries</header>
 		<router-link to="/" v-bind:class="this.$route.path === '/' ? 'Active' : ''">Dashboard</router-link>
-		<router-link to="/recipes" v-bind:class="this.$route.path === '/recipes' ? 'Active' : ''">Recipes</router-link>
+		<router-link to="/breweries" v-bind:class="this.$route.path.startsWith('/breweries') ? 'Active' : ''">Breweries</router-link>
+		<router-link to="/recipes" v-bind:class="this.$route.path.startsWith('/recipes') ? 'Active' : ''">Recipes</router-link>
 		<header class="NavigationHeading">Account</header>
-		<a href="http://localhost:8080/auth/realms/Brewtools/account" target="_blank">Manage account</a>
+		<a href="https://id.brewtools.org/auth/realms/Brewtools/account" target="_blank">Manage account</a>
 		<a @click=this.$keycloak.logoutFn>Logout</a>
 	</nav>
 </template>
