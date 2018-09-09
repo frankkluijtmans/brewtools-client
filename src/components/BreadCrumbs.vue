@@ -23,7 +23,7 @@ export default {
     @import '../styles/_variables';
 
     #breadcrumbs {
-        margin: 15px 0;
+        padding: 15px 0;
         
         color: $semidark-color;
         font-size: $SN;

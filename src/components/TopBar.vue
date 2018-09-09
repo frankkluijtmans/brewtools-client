@@ -42,8 +42,8 @@ export default {
 			line-height: 60px;
 
 			img {
-				height: 30px;
-				margin: 15px;
+				height: 26px;
+				margin: 17px;
 			}
 		}
 
