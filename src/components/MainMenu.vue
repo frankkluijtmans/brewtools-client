@@ -1,8 +1,7 @@
 <template>
 	<nav id="main-navigation">
-		<header class="NavigationHeading">Breweries</header>
+		<header class="NavigationHeading">Main menu</header>
 		<router-link to="/" v-bind:class="this.$route.path === '/' ? 'Active' : ''">Dashboard</router-link>
-		<router-link to="/breweries" v-bind:class="this.$route.path.startsWith('/breweries') ? 'Active' : ''">Breweries</router-link>
 		<router-link to="/recipes" v-bind:class="this.$route.path.startsWith('/recipes') ? 'Active' : ''">Recipes</router-link>
 		<header class="NavigationHeading">Account</header>
 		<a href="https://id.brewtools.org/auth/realms/Brewtools/account" target="_blank">Manage account</a>

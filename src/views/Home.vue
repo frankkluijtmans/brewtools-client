@@ -31,17 +31,14 @@ export default {
   },
   mounted() {
 
-    axios.post('http://localhost:3000/insert');
-
     axios.get('http://localhost:3000/', {
       headers: {
         "Content-Type": "application/json"
       }
-    })
-      .then((response) => { 
+    }).then((response) => { 
     
-          this.apiOutput = response.data.test
-      })
+      this.apiOutput = response.data.test
+    })
   }
 }
 </script>
