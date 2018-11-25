@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <WelcomeBack :user=username />
-    <p>
-      {{ apiOutput }}
+    <p v-if="output.id !== null">
+      Found a cat named {{ output.name }} with ID {{ output.id }}
     </p>
   </div>
 </template>
@@ -19,7 +19,10 @@ export default {
   data: function() {
     
     return {
-      apiOutput: 'test'
+      output: {
+        id: null,
+        name: null
+      }
     }
   },
   computed: {
@@ -36,8 +39,9 @@ export default {
         "Content-Type": "application/json"
       }
     }).then((response) => { 
-    
-      this.apiOutput = response.data.test
+      
+      this.output.name = response.data[0].name;
+      this.output.id = response.data[0]._id;
     })
   }
 }
