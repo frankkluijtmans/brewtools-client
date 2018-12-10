@@ -15,7 +15,7 @@
         :key="recipe._id"  
       >
         <router-link
-          to="/recipes/detail/1" 
+          :to='"/recipes/detail/" + recipe._id'
           class="TableRow"
         >
           <span>{{ recipe.name }}</span>
@@ -23,7 +23,10 @@
           <span>The Monkey Brewery</span>
           <span>16 Jul. 2018</span>
           <span class="Buttons">
-            <router-link to="/recipes/edit/1" class="Button Edit">
+            <router-link 
+              :to='"/recipes/edit/" + recipe._id'
+              class="Button Edit"
+            >
               <i class="fas fa-edit"></i> Edit
             </router-link>
             <a 
