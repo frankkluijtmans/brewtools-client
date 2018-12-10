@@ -2,14 +2,14 @@
   <div class="home">
     <WelcomeBack :user=username />
     <p v-if="output.id !== null">
-      Found a cat named {{ output.name }} with ID {{ output.id }}
+      Found a recipe named {{ output.name }} with ID {{ output.id }}
     </p>
   </div>
 </template>
 
 <script>
 import WelcomeBack from '@/components/WelcomeBack.vue'
-import axios from 'axios'
+import RecipeRepository from '../repositories/recipe-repository';
 
 export default {
   name: 'home',
@@ -33,16 +33,13 @@ export default {
     }
   },
   mounted() {
-
-    axios.get('http://localhost:3000/', {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((response) => { 
       
-      this.output.name = response.data[0].name;
-      this.output.id = response.data[0]._id;
-    })
+    RecipeRepository.get('5c0ebb02095194376c1c517a')
+      .then(response => {
+        
+        this.output.id = response._id;
+        this.output.name = response.name;
+      })
   }
 }
 </script>

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import RecipeRepository from '../../repositories/recipe-repository';
 
 export default {
   name: 'NewRecipe',
@@ -23,13 +23,10 @@ export default {
 
   methods: {
     handleSubmit() {
-      axios.post(
-        'http://localhost:3000/insert',
-        this.recipe
-      ).then(() => {
-      
-        alert('submission saved');
-      });
+      RecipeRepository.create(this.recipe)
+        .then(() => {
+          alert('recipe saved');
+        })
     }
   }
 }
