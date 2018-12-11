@@ -7,23 +7,23 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 function tokenInterceptor () {
-  axios.interceptors.request.use(config => {
-    config.headers.Authorization = `Bearer ${Vue.prototype.$keycloak.token}`
-    return config
-  }, error => {
-    return Promise.reject(error)
-  })
+	axios.interceptors.request.use(config => {
+		config.headers.Authorization = `Bearer ${Vue.prototype.$keycloak.token}`
+		return config
+	}, error => {
+		return Promise.reject(error)
+	})
 }
 
 Vue.use(VueKeyCloak, {
-  config: "http://localhost:8080/keycloak.json",
-  onReady: () => {
+	config: "http://localhost:8080/keycloak.json",
+	onReady: () => {
 
-    tokenInterceptor()
+		tokenInterceptor()
 
-    new Vue({
-      router,
-      render: h => h(App)
-    }).$mount('#app')
-  }   
+		new Vue({
+			router,
+			render: h => h(App)
+		}).$mount('#app')
+	}   
 });

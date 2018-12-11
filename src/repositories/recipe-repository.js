@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class RecipeRepository {
+export default class RecipeRepository {
 
     static get(id){
 
@@ -88,5 +88,3 @@ class RecipeRepository {
         });
     }
 }
-
-export default RecipeRepository;

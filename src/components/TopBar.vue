@@ -62,7 +62,7 @@ export default {
 				border-radius: 50%;
 				border: 3px solid $white;
 
-				background: url(https://www.quantumlah.org/images/people/user.png) no-repeat center center;
+				background: url(../assets/user.png) no-repeat center center;
 				background-size: cover;
 			}
 		}
