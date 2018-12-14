@@ -21,7 +21,8 @@ export default {
 	#main-navigation {
 		flex: 0 0 250px;
 		margin: 0 25px 0 0;
-		height: calc(100vh - 60px);
+		min-height: calc(100vh - 60px);
+		height: 100%;
 
 		background: $dark-color;
 

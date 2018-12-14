@@ -76,10 +76,10 @@ export default class RecipeRepository {
 
         return new Promise((resolve) => {
 
-            axios.get(
+            axios.post(
                 'http://localhost:3000/recipe/delete/' + id
             ).then(() => {
-            
+
                 resolve();
             }).catch(e => {
 
