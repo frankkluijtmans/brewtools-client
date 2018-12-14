@@ -34,11 +34,11 @@ export default {
 	},
 	mounted() {
 			
-		RecipeRepository.get('5c1024ca14ad0f22ac0bb7b0')
+		RecipeRepository.getAll()
 			.then(response => {
 				
-				this.output.id = response._id;
-				this.output.name = response.name;
+				this.output.id = response[0]._id;
+				this.output.name = response[0].name;
 			})
 	}
 }

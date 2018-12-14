@@ -22,9 +22,12 @@
         border-top: 1px solid $light-color;
     }
 
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
     .TableRow {
-        display: flex;
-        flex-direction: row;
         text-decoration: none;
 
         &:hover {
@@ -34,7 +37,7 @@
         &.TableHeader {
             font-weight: 600;
         
-            span {
+            td {
                 font-weight: 600;
                 border-bottom: 1px solid $light-color;
 
@@ -45,46 +48,51 @@
             }
         }
 
-        span {
-            flex: 0 0 20%;
+        td {
             padding: 12px 10px;
-            display: flex;
-            align-items: center;
             color: $dark-color;
 
-            &.Buttons {
-                display: flex;
-                justify-content: flex-end;
-            }
+            &.RecipeTitle {
+                position: relative;
+                padding-left: 40px;
 
-            &.Flex-25 {
-                flex: 0 0 25%;  
-            }
-
-            &.Flex-33 {
-                flex: 0 0 33.33%;  
+                .EBCBadge {
+                    position: absolute;
+                    left: 10px;
+                }
             }
         }
     }
 
     .Button {
+        display: inline-block;
+        margin-left: 10px;
         border: none;
         border-radius: 5px;
-        padding: 5px;
-        color: $semidark-color;
+        padding: 5px 8px;
+        color: $white;
+        background: $blue;
         text-decoration: none;
         font-size: $SN;
         cursor: pointer;
 
-        &.Edit {
-            margin-right: 10px;
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &.Delete {
+            background: $red;
         }
 
         &.New {
             display: inline-block;
-            padding: 8px 12px;
-            background: $primary-color;
+            padding: 10px 14px;
+            background: $brown;
             color: $white;
+        }
+
+        i {
+            margin-right: 6px;
         }
     }
 }

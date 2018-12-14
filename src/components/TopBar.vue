@@ -18,7 +18,7 @@ export default {
 
 		username: function () {
 
-			return this.$keycloak.userName
+			return this.$keycloak.fullName
 		}
 	}
 }

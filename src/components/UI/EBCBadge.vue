@@ -1,0 +1,34 @@
+<template>
+	<div 
+        class="EBCBadge"
+        :style="{ background: color }"
+    />
+</template>
+
+<script>
+import EBCHelper from '../../helpers/ebc-helper';
+
+export default {
+    name: 'EBCBadge',
+    props: {
+        ebc: Number
+    },
+    computed: {
+
+        color: function() {
+
+            return EBCHelper.color(parseInt(this.ebc));
+        }
+    }
+}
+</script>
+
+<style scoped lang="scss">
+    .EBCBadge {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+</style>

@@ -3,49 +3,57 @@
 		<h1 class="PageTitle">Your recipes</h1>
 		<div class="OverviewTable">
 			<header>Overview</header>
-			<div class="TableRow TableHeader">
-				<span>Recipe <i class="fas fa-sort"></i></span>
-				<span>Style <i class="fas fa-sort"></i></span>
-				<span>ABV <i class="fas fa-sort"></i></span>
-				<span>Last edited <i class="fas fa-sort"></i></span>
-				<span></span>
-			</div>
 			<EmptyTable v-if="recipes.length === 0" />
-			<div 
-				v-for="recipe in recipes"
-				:key="recipe._id"  
-			>
-				<router-link
-					:to='"/recipes/detail/" + recipe._id'
-					class="TableRow"
-				>
-					<span>
-						<i
-							v-if="!isOwner(recipe.owner)"
-							class="fas fa-share-square SharedRecipeIcon"
-						/>
-						{{ recipe.name }}
-					</span>
-					<span>{{ recipe.style }}</span>
-					<span>{{ calculateABV(recipe.og, recipe.fg ) }}%</span>
-					<span>{{ parseDate(recipe.last_edited.date) }}</span>
-					<span class="Buttons">
-						<router-link 
-							:to='"/recipes/edit/" + recipe._id'
-							class="Button Edit"
-						>
-							<i class="fas fa-edit" /> Edit
-						</router-link>
-						<a
-							v-if="isOwner(recipe.owner)"
-							@click="deleteRecipe(recipe._id)"
-							class="Button Delete"
-						>
-							<i class="fas fa-trash" /> Delete
-						</a>
-					</span>
-				</router-link>
-			</div>
+			<table v-else>
+				<tbody>
+					<tr class="TableRow TableHeader">
+						<td>Recipe <i class="fas fa-sort"></i></td>
+						<td>Style <i class="fas fa-sort"></i></td>
+						<td>ABV <i class="fas fa-sort"></i></td>
+						<td>Last edited <i class="fas fa-sort"></i></td>
+						<td>Actions</td>
+					</tr>
+					<tr
+						v-for="recipe in recipes"
+						:key="recipe._id"
+						class="TableRow"
+					>
+						<td class="RecipeTitle">
+							<EBCBadge :ebc="recipe.ebc" />
+							{{ recipe.name }}
+							<span
+								v-if="!isOwner(recipe.owner)"
+							>
+								(Shared with you)
+							</span>
+						</td>
+						<td>{{ recipe.style }}</td>
+						<td>{{ calculateABV(recipe.og, recipe.fg ) }}%</td>
+						<td>{{ parseDate(recipe.last_edited.date) }}</td>
+						<td class="Buttons">
+							<router-link
+								:to='"/recipes/detail/" + recipe._id'
+								class="Button View"
+							>
+								<i class="fas fa-eye" /> View
+							</router-link>
+							<router-link 
+								:to='"/recipes/edit/" + recipe._id'
+								class="Button Edit"
+							>
+								<i class="fas fa-edit" /> Edit
+							</router-link>
+							<a
+								@click="deleteRecipe(recipe._id)"
+								v-if="isOwner(recipe.owner)"
+								class="Button Delete"
+							>
+								<i class="fas fa-trash" /> Delete
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 			<footer>
 				<router-link to="/recipes/new" class="Button New"><i class="fas fa-plus" /> Create a new recipe</router-link>
 			</footer>
@@ -55,6 +63,7 @@
 
 <script>
 import EmptyTable from '../../components/UI/EmptyTable';
+import EBCBadge from '../../components/UI/EBCBadge';
 import RecipeRepository from '../../repositories/recipe-repository';
 import ABVHelper from '../../helpers/abv-helper';
 import moment from 'moment';
@@ -62,7 +71,8 @@ import moment from 'moment';
 export default {
 	name: 'recipes-overview',
 	components: {
-		EmptyTable
+		EmptyTable,
+		EBCBadge
 	},
 	data: function() {
 
@@ -83,12 +93,17 @@ export default {
 
 			RecipeRepository.delete(id)
 				.then(() => {
-					alert('recipe deleted');
+					
+					for (let i = this.recipes.length - 1; i >= 0; --i) {
+						if (this.recipes[i]._id == id) {
+							this.recipes.splice(i,1);
+						}
+					}
 				})
 		},
 		parseDate: function(date) {
 
-			return moment(date).format("DD MMM YYYY - HH:mm");
+			return moment(date).format("DD MMM YYYY") + " at " + moment(date).format("HH:mm");
 		},
 		calculateABV: function(og, fg) {
 
@@ -104,8 +119,4 @@ export default {
 
 <style lang="scss">
 	@import '../../styles/_tables';
-
-	.SharedRecipeIcon {
-		margin-right: 5px;
-	}
 </style>
