@@ -6,13 +6,21 @@
         <div 
             class="Modal"
         >
-            <i class="fa fa-exclamation-circle ModalIcon"></i>
+            <span class="ModalIcon">
+                !
+            </span>
             <h2 class="ModalTitle">Are you sure?</h2>
             <p class="ModalText">
                 <slot />
             </p>
-            <button @click="fireEvent('modal_confirmed')">Confirm</button>
-            <button @click="fireEvent('modal_canceled')">Cancel</button>
+            <button 
+                @click="fireEvent('modal_confirmed')"
+                class="Button Confirm"
+            >Confirm</button>
+            <button 
+                @click="fireEvent('modal_canceled')"
+                class="Button"
+            >Cancel</button>
         </div>
     </div>
 </template>
@@ -78,6 +86,7 @@ export default {
             left: 50%;
 
             width: 400px;
+            max-width: calc(100vw - 50px);
             padding: 25px;
             border-radius: 5px;
 
@@ -88,9 +97,15 @@ export default {
             text-align: center;
 
             .ModalIcon {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
                 margin: 0 0 15px;
 
-                font-size: 48px;
+                border-radius: 50%;
+                border: 3px solid $red;
+
+                font-size: 72px;
                 color: $red;
             }
 
@@ -103,11 +118,29 @@ export default {
             }
 
             .ModalText {
-                margin: 0 0 15px;
+                margin: 0 0 25px;
 
                 font-size: $N;
                 font-weight: 300;
                 color: $semidark-color;
+            }
+
+            .Button {
+                display: inline-block;
+                margin-left: 10px;
+                border: none;
+                border-radius: 5px;
+                padding: 15px 18px;
+                color: $white;
+                background: $semidark-color;
+                text-decoration: none;
+                font-size: $SN;
+                cursor: pointer;
+
+                &.Confirm {
+                    margin-left: 0;
+                    background: $blue;
+                }
             }
         }
     }
