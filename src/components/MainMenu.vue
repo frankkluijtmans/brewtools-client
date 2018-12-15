@@ -20,9 +20,9 @@ export default {
 
 	#main-navigation {
 		flex: 0 0 250px;
-		margin: 0 25px 0 0;
+		margin: 0;
 		min-height: calc(100vh - 60px);
-		height: 100%;
+		height: auto;
 
 		background: $dark-color;
 

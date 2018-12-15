@@ -1,65 +1,53 @@
 <template>
-	<div class="Page">
-		<h1 class="PageTitle">Triple nipple</h1>
+	<div>
+		<h1 class="PageTitle">{{ recipe.name }}</h1>
 
 		<div class="Grid">
 			<div class="MainContent">
-				<div class="OverviewTable Mash">
-					<header>Mash</header>
-					<div class="TableRow TableHeader">
-						<span class="Flex-33">Malt <i class="fas fa-sort"></i></span>
-						<span class="Flex-33">Color <i class="fas fa-sort"></i></span>
-						<span class="Flex-33">Volume <i class="fas fa-sort"></i></span>
-					</div>
-					<div class="TableRow">
-						<span class="Flex-33">Pilsener</span>
-						<span class="Flex-33">8 EBC</span>
-						<span class="Flex-33">4500 gram</span>
-					</div>
-					<div class="TableRow">
-						<span class="Flex-33">Caramunich</span>
-						<span class="Flex-33">120 EBC</span>
-						<span class="Flex-33">1200 gram</span>
-					</div>
-					<div class="TableRow">
-						<span class="Flex-33">Roasted malt</span>
-						<span class="Flex-33">1200 EBC</span>
-						<span class="Flex-33">80 gram</span>
-					</div>
+				<div class="OverviewTable Grains">
+					<header>Grains</header>
+					<table>
+						<tbody>
+							<tr class="TableRow TableHeader">
+								<td>Malt</td>
+								<td>Color</td>
+								<td>Volume</td>
+							</tr>
+							<tr 
+								v-for="grain in recipe.grains"
+								:key="grain._id"
+								class="TableRow"
+							>
+								<td>{{ grain.name }}</td>
+								<td>{{ grain.color }} EBC</td>
+								<td>{{ grain.volume }} gram</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 
 				<div class="OverviewTable Hops">
 					<header>Hops</header>
-					<div class="TableRow TableHeader">
-						<span class="Flex-25">Kind <i class="fas fa-sort"></i></span>
-						<span class="Flex-25">Bitterness <i class="fas fa-sort"></i></span>
-						<span class="Flex-25">Volume <i class="fas fa-sort"></i></span>
-						<span class="Flex-25">Time to boil <i class="fas fa-sort"></i></span>
-					</div>
-					<div class="TableRow">
-						<span class="Flex-25">Cascade</span>
-						<span class="Flex-25">5,2%</span>
-						<span class="Flex-25">45 gram</span>
-						<span class="Flex-25">60 minutes</span>
-					</div>
-					<div class="TableRow">
-						<span class="Flex-25">Mt. Hood</span>
-						<span class="Flex-25">8%</span>
-						<span class="Flex-25">12 gram</span>
-						<span class="Flex-25">60 minutes</span>
-					</div>
-					<div class="TableRow">
-						<span class="Flex-25">Tettnanger</span>
-						<span class="Flex-25">6,7%</span>
-						<span class="Flex-25">33 gram</span>
-						<span class="Flex-25">30 minutes</span>
-					</div>
-					<div class="TableRow">
-						<span class="Flex-25">Magnum</span>
-						<span class="Flex-25">11%</span>
-						<span class="Flex-25">10 gram</span>
-						<span class="Flex-25">0 minutes</span>
-					</div>
+					<table>
+						<tbody>
+							<tr class="TableRow TableHeader">
+								<td>Kind</td>
+								<td>Bitterness</td>
+								<td>Volume</td>
+								<td>Time to boil</td>
+							</tr>
+							<tr 
+								v-for="hop in recipe.hops"
+								:key="hop._id"
+								class="TableRow"
+							>
+								<td>{{ hop.name }}</td>
+								<td>{{ hop.bitterness.$numberDecimal }}%</td>
+								<td>{{ hop.volume }} gram</td>
+								<td>{{ hop.boiling_time }} minutes</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 
@@ -78,12 +66,32 @@
 	</div>
 </template>
 
+<script>
+import RecipeRepository from '../../repositories/recipe-repository';
+
+export default {
+	name: 'RecipeDetail',
+	data() {
+		return {
+			recipe: {}
+		}
+	},
+	mounted() {
+
+		RecipeRepository.get(this.$route.params.id)
+			.then(data => {
+
+				this.recipe = data;
+			})
+	}
+}
+</script>
+
 <style lang="scss" scoped>
 	@import '../../styles/_variables';
 	@import '../../styles/_mixins';
 
 	.SwitchableContent {
-		margin-right: 25px;
 		border-radius: 5px;
 		background: $white;
 		box-shadow: 0 1px 1px rgba(0,0,0,.05);
@@ -112,7 +120,7 @@
 
 	.OverviewTable {
 
-		&.Mash {
+		&.Grains {
 			margin-bottom: 25px;
 
 			header {

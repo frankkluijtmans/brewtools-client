@@ -7,11 +7,21 @@
 			<table v-else>
 				<tbody>
 					<tr class="TableRow TableHeader">
-						<td>Recipe <i class="fas fa-sort"></i></td>
-						<td>Style <i class="fas fa-sort"></i></td>
-						<td>ABV <i class="fas fa-sort"></i></td>
-						<td>Last edited <i class="fas fa-sort"></i></td>
-						<td>Actions</td>
+						<td @click="sortRecipes('name')" class="Sortable">
+							Recipe <i class="fas fa-sort"></i>
+						</td>
+						<td @click="sortRecipes('style')" class="Sortable">
+							Style <i class="fas fa-sort"></i>
+						</td>
+						<td @click="sortRecipes('abv')" class="Sortable">
+							ABV <i class="fas fa-sort"></i>
+						</td>
+						<td @click="sortRecipes('lastEdited')" class="Sortable">
+							Last edited <i class="fas fa-sort"></i>
+						</td>
+						<td>
+							Actions
+						</td>
 					</tr>
 					<tr
 						v-for="recipe in recipes"
@@ -21,11 +31,11 @@
 						<td class="RecipeTitle">
 							<EBCBadge :ebc="recipe.ebc" />
 							{{ recipe.name }}
-							<span
+							<i
 								v-if="!isOwner(recipe.owner)"
 							>
-								(Shared with you)
-							</span>
+								(Shared)
+							</i>
 						</td>
 						<td>{{ recipe.style }}</td>
 						<td>{{ calculateABV(recipe.og, recipe.fg ) }}%</td>
@@ -66,6 +76,7 @@ import EmptyTable from '../../components/UI/EmptyTable';
 import EBCBadge from '../../components/UI/EBCBadge';
 import RecipeRepository from '../../repositories/recipe-repository';
 import ABVHelper from '../../helpers/abv-helper';
+import SortingHelper from '../../helpers/sorting-helper';
 import moment from 'moment';
 
 export default {
@@ -100,6 +111,10 @@ export default {
 						}
 					}
 				})
+		},
+		sortRecipes: function(type) {
+
+			this.recipes.sort(SortingHelper[type]);
 		},
 		parseDate: function(date) {
 

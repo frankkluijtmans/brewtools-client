@@ -2,7 +2,6 @@
 @import '_mixins';
 
 .OverviewTable {
-    margin-right: 25px;
     border-radius: 5px;
     background: $white;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
@@ -30,11 +29,12 @@
     .TableRow {
         text-decoration: none;
 
-        &:hover {
-            background: rgba(0,0,0,0.05);
+        &:nth-child(odd) {
+            background: rgba(0,0,0,0.02);
         }
 
         &.TableHeader {
+            background: $white;
             font-weight: 600;
         
             td {
@@ -51,6 +51,10 @@
         td {
             padding: 12px 10px;
             color: $dark-color;
+
+            &.Sortable {
+                cursor: pointer;
+            }
 
             &.RecipeTitle {
                 position: relative;

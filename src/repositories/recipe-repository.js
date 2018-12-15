@@ -1,4 +1,5 @@
 import axios from 'axios';
+import SortingHelper from '../helpers/sorting-helper';
 
 export default class RecipeRepository {
 
@@ -30,7 +31,7 @@ export default class RecipeRepository {
                 }
             }).then((response) => { 
 
-                resolve(response.data);
+                resolve(response.data.sort(SortingHelper.created));
             }).catch(e => {
 
                 console.warn('Recipe repository(getCollection): ' + e);

@@ -25,6 +25,7 @@ h1 {
 
 .Page {
     width: 100%;
+    padding: 25px;
 }
 
 .Grid {
@@ -32,6 +33,7 @@ h1 {
 
     .MainContent {
         flex: 0 0 65%;
+        padding-right: 25px;
     }
 
     .Sidebar {
