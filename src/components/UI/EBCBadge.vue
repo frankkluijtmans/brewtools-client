@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
     .EBCBadge {
         display: inline-block;
         width: 20px;

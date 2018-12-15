@@ -68,10 +68,14 @@
 				<router-link to="/recipes/new" class="Button New"><i class="fas fa-plus" /> Create a new recipe</router-link>
 			</footer>
 		</div>
+		<ConfirmModal ref="confirmDelete">
+			Do you really want to delete this recipe? This process cannot be undone.
+		</ConfirmModal>
 	</div>
 </template>
 
 <script>
+import ConfirmModal from '../../components/UI/ConfirmModal';
 import EmptyTable from '../../components/UI/EmptyTable';
 import EBCBadge from '../../components/UI/EBCBadge';
 import RecipeRepository from '../../repositories/recipe-repository';
@@ -82,6 +86,7 @@ import moment from 'moment';
 export default {
 	name: 'recipes-overview',
 	components: {
+		ConfirmModal,
 		EmptyTable,
 		EBCBadge
 	},
@@ -102,7 +107,9 @@ export default {
 
 		deleteRecipe: function(id) {
 
-			RecipeRepository.delete(id)
+			this.$refs.confirmDelete.showModal().then(() => {
+
+				RecipeRepository.delete(id)
 				.then(() => {
 					
 					for (let i = this.recipes.length - 1; i >= 0; --i) {
@@ -111,6 +118,7 @@ export default {
 						}
 					}
 				})
+			});
 		},
 		sortRecipes: function(type) {
 

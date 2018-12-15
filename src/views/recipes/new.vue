@@ -4,8 +4,8 @@
 		<form @submit.prevent="handleSubmit">
 			<div class="Grid">
 				<div class="MainContent">
-					<div class="OverviewTable Grains">
-						<header>Grains</header>
+					<div class="OverviewTable Fermentables">
+						<header>Fermentables</header>
 						<table>
 							<tbody>
 								<tr class="TableRow TableHeader">
@@ -15,26 +15,27 @@
 									<td></td>
 								</tr>
 								<template 
-									v-for="(grain, index) in recipe.grains"
+									v-for="(fermentable, index) in recipe.fermentables"
 								>
 									<tr 
 										:key="index"
 										class="TableRow"
 									>
 										<td>
-											<input type="text" v-model="grain.name" placeholder="Name">
+											<input type="text" v-model="fermentable.name" placeholder="Name">
 										</td>
 										<td>
-											<input type="number" v-model="grain.color" placeholder="Color">
+											<input type="number" v-model="fermentable.color" placeholder="Color">
 										</td>
 										<td>
-											<input type="number" v-model="grain.volume" placeholder="Volume">
+											<input type="number" v-model="fermentable.volume" placeholder="Volume">
 										</td>
 										<td>
-											<button 
-												@click="recipe.grains.splice(index, 1)"
+											<a 
+												@click="recipe.fermentables.splice(index, 1)"
 												type="button"
-											><i class="fas fa-trash" /></button>
+												class="RemoveFields"
+											><i class="fas fa-trash" /></a>
 										</td>
 									</tr>
 								</template>
@@ -42,7 +43,7 @@
 						</table>
 						<footer>
 							<button
-								@click="recipe.grains.push({
+								@click="recipe.fermentables.push({
 									name: '',
 									color: null,
 									volume: null
@@ -84,10 +85,11 @@
 											<input type="number" v-model="hop.boiling_time" placeholder="Boiling time">
 										</td>
 										<td>
-											<button 
+											<a 
 												@click="recipe.hops.splice(index, 1)"
 												type="button"
-											><i class="fas fa-trash" /></button>
+												class="RemoveFields"
+											><i class="fas fa-trash" /></a>
 										</td>
 									</tr>
 								</template>
@@ -153,7 +155,7 @@ export default {
 					volume: null,
 					boiling_time: null
 				}],
-				grains: [{
+				fermentables: [{
 					name: '',
 					color: null,
 					volume: null
@@ -188,7 +190,7 @@ export default {
 
 	.OverviewTable {
 
-		&.Grains {
+		&.Fermentables {
 			margin-bottom: 25px;
 
 			header {

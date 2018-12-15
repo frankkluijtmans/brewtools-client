@@ -38,18 +38,22 @@
             font-weight: 600;
         
             td {
-                font-weight: 600;
                 border-bottom: 1px solid $light-color;
 
+                font-size: $N;
+                font-weight: 600;
+
                 i {
-                    font-size: $S;
-                    margin-left: 10px;
+                    font-size: $SN;
+                    margin-left: 5px;
                 }
             }
         }
 
         td {
             padding: 12px 10px;
+
+            font-size: $SN;
             color: $dark-color;
 
             &.Sortable {
@@ -65,7 +69,19 @@
                     left: 10px;
                 }
             }
+
+            input {
+                height: 25px;
+                line-height: 25px;
+                border: none;
+                background: none;
+                font-size: $SN;
+            }
         }
+    }
+
+    .RemoveFields {
+        cursor: pointer;
     }
 
     .Button {

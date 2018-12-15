@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<h1 class="PageTitle">{{ recipe.name }}</h1>
+		<h1 class="PageTitle">{{ recipe.name }} ({{ recipe.style }})</h1>
 
 		<div class="Grid">
 			<div class="MainContent">
-				<div class="OverviewTable Grains">
-					<header>Grains</header>
+				<div class="OverviewTable Fermentables">
+					<header>Fermentables</header>
 					<table>
 						<tbody>
 							<tr class="TableRow TableHeader">
@@ -14,13 +14,13 @@
 								<td>Volume</td>
 							</tr>
 							<tr 
-								v-for="grain in recipe.grains"
-								:key="grain._id"
+								v-for="fermentable in recipe.fermentables"
+								:key="fermentable._id"
 								class="TableRow"
 							>
-								<td>{{ grain.name }}</td>
-								<td>{{ grain.color }} EBC</td>
-								<td>{{ grain.volume }} gram</td>
+								<td>{{ fermentable.name }}</td>
+								<td>{{ fermentable.color }} EBC</td>
+								<td>{{ fermentable.volume }} gram</td>
 							</tr>
 						</tbody>
 					</table>
@@ -98,8 +98,8 @@ export default {
 		overflow: hidden;
 
 		nav {
+			background: $light-color;
 			color: $dark-color;
-			border-bottom: 1px solid $light-color;
 
 			a {
 				display: inline-block;
@@ -108,7 +108,8 @@ export default {
 				cursor: pointer;
 
 				&.Active {
-					border-bottom: 4px solid $primary-color;
+					background: $white;
+					border-radius: 5px 5px 0 0;
 				}
 			}
 		}
@@ -120,7 +121,7 @@ export default {
 
 	.OverviewTable {
 
-		&.Grains {
+		&.Fermentables {
 			margin-bottom: 25px;
 
 			header {
