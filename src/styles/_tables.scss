@@ -107,7 +107,10 @@
         &.New {
             display: inline-block;
             padding: 10px 14px;
+
             background: $brown;
+
+            font-size: $N;
             color: $white;
         }
 

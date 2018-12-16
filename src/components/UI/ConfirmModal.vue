@@ -134,7 +134,7 @@ export default {
                 color: $white;
                 background: $semidark-color;
                 text-decoration: none;
-                font-size: $SN;
+                font-size: $N;
                 cursor: pointer;
 
                 &.Confirm {
