@@ -4,7 +4,7 @@
 		<form @submit.prevent="handleSubmit">
 			<div class="Grid">
 				<div class="MainContent">
-					<div class="OverviewTable Fermentables">
+					<div class="TableContainer Fermentables">
 						<header>Fermentables</header>
 						<table>
 							<tbody>
@@ -25,10 +25,12 @@
 											<input type="text" v-model="fermentable.name" placeholder="Name">
 										</td>
 										<td>
-											<input type="number" v-model="fermentable.color" placeholder="Color">
+											<input type="number" v-model="fermentable.color">
+											<label class="InputLabel">EBC</label>
 										</td>
 										<td>
-											<input type="number" v-model="fermentable.volume" placeholder="Volume">
+											<input type="number" v-model="fermentable.volume">
+											<label class="InputLabel">grams</label>
 										</td>
 										<td>
 											<a 
@@ -49,12 +51,12 @@
 									volume: null
 								})"
 								type="button"
-								class="Button New"
+								class="Button Add"
 							><i class="fas fa-plus" /> Add a grain</button>
 						</footer>
 					</div>
 
-					<div class="OverviewTable Hops">
+					<div class="TableContainer Hops">
 						<header>Hops</header>
 						<table>
 							<tbody>
@@ -76,13 +78,16 @@
 											<input type="text" v-model="hop.name" placeholder="Name">
 										</td>
 										<td>
-											<input type="number" v-model="hop.bitterness" placeholder="Bitterness">
+											<input type="number" step="0.01" v-model="hop.bitterness">
+											<label class="InputLabel">%</label>
 										</td>
 										<td>
-											<input type="number" v-model="hop.volume" placeholder="Volume">
+											<input type="number" v-model="hop.volume">
+											<label class="InputLabel">grams</label>
 										</td>
 										<td>
-											<input type="number" v-model="hop.boiling_time" placeholder="Boiling time">
+											<input type="number" v-model="hop.boiling_time">
+											<label class="InputLabel">minutes</label>
 										</td>
 										<td>
 											<a 
@@ -104,7 +109,7 @@
 									boiling_time: null
 								})"
 								type="button"
-								class="Button New"
+								class="Button Add"
 							><i class="fas fa-plus" /> Add a hop</button>
 						</footer>
 					</div>
@@ -118,7 +123,7 @@
 				</div>
 
 				<div class="Sidebar">
-					<div class="OverviewTable KeyFacts">
+					<div class="TableContainer KeyFacts">
 						<header>Key facts</header>
 						<table>
 							<tbody>
@@ -141,6 +146,7 @@
 								>
 									<td>
 										<input type="number" v-model="recipe.boiling_time" placeholder="Boiling time">
+										<label class="InputLabel">minutes</label>
 									</td>
 								</tr>
 								<tr
@@ -160,12 +166,24 @@
 							</tbody>
 						</table>
 						<footer>
-							EBC: {{ calculatedEbc }}
-							ABV: {{ calculatedAbv }}
+							<ul class="CalculatedKeyFacts">
+								<li>
+									{{ calculatedEbc }}
+									<footer>EBC</footer>
+								</li>
+								<li>
+									0
+									<footer>IBU</footer>
+								</li>
+								<li>
+									{{ calculatedAbv }}
+									<footer>ABV</footer>
+								</li>	
+							</ul>
 						</footer>
 					</div>
 
-					<div class="OverviewTable Water">
+					<div class="TableContainer Water">
 						<header>Water</header>
 						<table>
 							<tbody>
@@ -173,7 +191,8 @@
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.base_volume" placeholder="Total volume">
+										<input type="number" v-model="recipe.base_volume" placeholder="Actual volume">
+										<label class="InputLabel">liter</label>
 									</td>
 								</tr>
 								<tr
@@ -181,6 +200,7 @@
 								>
 									<td>
 										<input type="number" v-model="recipe.mash_water" placeholder="Mash water">
+										<label class="InputLabel">liter</label>
 									</td>
 								</tr>
 								<tr
@@ -188,6 +208,7 @@
 								>
 									<td>
 										<input type="number" v-model="recipe.flush_water" placeholder="Flush water">
+										<label class="InputLabel">liter</label>
 									</td>
 								</tr>
 							</tbody>
@@ -202,6 +223,7 @@
 <script>
 import RecipeRepository from '../../repositories/recipe-repository';
 import ABVHelper from '../../helpers/abv-helper';
+import EBCHelper from '../../helpers/ebc-helper';
 
 export default {
 	name: 'NewRecipe',
@@ -214,7 +236,7 @@ export default {
 				og: null,
 				fg: null,
 				ibu: null,
-				ebc: this.calculatedEbc,
+				ebc: null,
 				base_volume: null,
 				boiling_time: null,
 				mash_water: null,
@@ -243,40 +265,24 @@ export default {
 
 		calculatedEbc() {
 
-			let totalVolume = 0;
-			let totalEbc = 0;
-
-			this.recipe.fermentables.forEach(fermentable => {
-
-				if(fermentable.volume !== null) {
-					
-					totalVolume += parseInt(fermentable.volume);
-				}
-			});
-
-			this.recipe.fermentables.forEach(fermentable => {
-
-				if(fermentable.volume !== null && fermentable.color !== null) {
-					
-					let percentile = Math.round(parseInt(fermentable.volume) / (totalVolume / 100));
-					totalEbc += percentile * parseInt(fermentable.color);
-				}
-			});
-
-			return totalEbc / 100;
+			return EBCHelper.calculate(this.recipe.fermentables);
 		},
 		calculatedAbv() {
 
 			if(this.recipe.og !== null && this.recipe.fg !== null) {
 				
-				return ABVHelper.calculate(this.recipe.og, this.recipe.fg);
+				return ABVHelper.calculate(this.recipe.og, this.recipe.fg) + "%";
 			}
 
-			return null;
+			return 0;
 		}
 	},
 	methods: {
+
 		handleSubmit() {
+
+			this.recipe.ebc = this.calculatedEbc;
+
 			RecipeRepository.create(this.recipe)
 				.then(() => {
 					alert('recipe saved');
@@ -289,11 +295,6 @@ export default {
 <style lang="scss" scoped>
 	@import '../../styles/_variables';
 	@import '../../styles/_mixins';
-
-	input {
-		width: 100%;
-		display: block;
-	}
 
 	.SaveButton {
 		display: inline-block;
@@ -312,32 +313,27 @@ export default {
 		
         cursor: pointer;
 	}
+	
+	.CalculatedKeyFacts {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
 
-	.OverviewTable {
+		li {
+			flex: 0 0 33.3%;
+			color: $extradark-color;
+			text-align: center;
+			font-size: $XL;
+			font-weight: bold;
 
-		&.Fermentables {
-			margin-bottom: 25px;
-
-			header {
-				@include gradient(#773f19, #a26a44);
-			}
-		}
-
-		&.Hops {
-			
-			header {
-				@include gradient(#afc40c, #c6db20);
-			}
-		}
-
-		&.KeyFacts {
-			margin-bottom: 25px;
-		}
-
-		&.Water {
-			
-			header {
-				@include gradient(#089bd9, #0082c7);
+			footer {
+				border-top: none;
+				color: $semidark-color;
+				text-align: center;
+				font-weight: normal;
 			}
 		}
 	}

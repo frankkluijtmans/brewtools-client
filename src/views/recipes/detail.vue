@@ -4,7 +4,7 @@
 
 		<div class="Grid">
 			<div class="MainContent">
-				<div class="OverviewTable Fermentables">
+				<div class="TableContainer Fermentables">
 					<header>Fermentables</header>
 					<table>
 						<tbody>
@@ -26,7 +26,7 @@
 					</table>
 				</div>
 
-				<div class="OverviewTable Hops">
+				<div class="TableContainer Hops">
 					<header>Hops</header>
 					<table>
 						<tbody>
@@ -116,24 +116,6 @@ export default {
 
 		.Content {
 			padding: 15px;
-		}
-	}
-
-	.OverviewTable {
-
-		&.Fermentables {
-			margin-bottom: 25px;
-
-			header {
-				@include gradient(#773f19, #a26a44);
-			}
-		}
-
-		&.Hops {
-			
-			header {
-				@include gradient(#afc40c, #c6db20);
-			}
 		}
 	}
 </style>

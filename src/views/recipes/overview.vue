@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h1 class="PageTitle">Your recipes</h1>
-		<div class="OverviewTable">
+		<div class="TableContainer">
 			<header>Overview</header>
 			<EmptyTable v-if="recipes.length === 0" />
 			<table v-else>
