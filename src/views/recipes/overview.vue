@@ -3,21 +3,23 @@
 		<h1 class="PageTitle">Your recipes</h1>
 		<div class="TableContainer">
 			<header>Overview</header>
-			<EmptyTable v-if="recipes.length === 0" />
+			<EmptyTable v-if="recipes.length === 0">
+				Start creating some recipes to fill up this overview.
+			</EmptyTable>
 			<table v-else>
 				<tbody>
 					<tr class="TableRow TableHeader">
 						<td @click="sortRecipes('name')" class="Sortable">
-							Recipe <i class="fas fa-sort"></i>
+							Recipe <i class="fa fa-sort"></i>
 						</td>
 						<td @click="sortRecipes('style')" class="Sortable">
-							Style <i class="fas fa-sort"></i>
+							Style <i class="fa fa-sort"></i>
 						</td>
 						<td @click="sortRecipes('abv')" class="Sortable">
-							ABV <i class="fas fa-sort"></i>
+							ABV <i class="fa fa-sort"></i>
 						</td>
 						<td @click="sortRecipes('lastEdited')" class="Sortable">
-							Last edited <i class="fas fa-sort"></i>
+							Last edited <i class="fa fa-sort"></i>
 						</td>
 						<td>
 							Actions
@@ -45,27 +47,27 @@
 								:to='"/recipes/detail/" + recipe._id'
 								class="Button View"
 							>
-								<i class="fas fa-eye" /> View
+								<i class="fa fa-eye" /> View
 							</router-link>
 							<router-link 
 								:to='"/recipes/edit/" + recipe._id'
 								class="Button Edit"
 							>
-								<i class="fas fa-edit" /> Edit
+								<i class="fa fa-edit" /> Edit
 							</router-link>
 							<a
 								@click="deleteRecipe(recipe._id)"
 								v-if="isOwner(recipe.owner)"
 								class="Button Delete"
 							>
-								<i class="fas fa-trash" /> Delete
+								<i class="fa fa-trash" /> Delete
 							</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<footer>
-				<router-link to="/recipes/new" class="Button New"><i class="fas fa-plus" /> Create a new recipe</router-link>
+				<router-link to="/recipes/new" class="Button New"><i class="fa fa-plus" /> Create a new recipe</router-link>
 			</footer>
 		</div>
 		<ConfirmModal ref="confirmDelete">

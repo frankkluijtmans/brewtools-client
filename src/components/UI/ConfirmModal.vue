@@ -6,9 +6,7 @@
         <div 
             class="Modal"
         >
-            <span class="ModalIcon">
-                !
-            </span>
+            <i class="fa fa-exclamation-circle ModalIcon" />
             <h2 class="ModalTitle">Are you sure?</h2>
             <p class="ModalText">
                 <slot />
@@ -68,6 +66,7 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../styles/_variables';
+    @import '../../styles/_mixins';
 
     .BackDrop {
         position: fixed;
@@ -97,15 +96,9 @@ export default {
             text-align: center;
 
             .ModalIcon {
-                display: inline-block;
-                width: 100px;
-                height: 100px;
                 margin: 0 0 15px;
 
-                border-radius: 50%;
-                border: 3px solid $red;
-
-                font-size: 72px;
+                font-size: 120px;
                 color: $red;
             }
 
@@ -127,19 +120,26 @@ export default {
 
             .Button {
                 display: inline-block;
+                height: 50px;
                 margin-left: 10px;
+                padding: 0 18px;
+
                 border: none;
                 border-radius: 5px;
-                padding: 15px 18px;
+                
+                @include gradient($semidark-color, #747474);
+                box-shadow: 1px 1px 3px $light-color;
+
                 color: $white;
-                background: $semidark-color;
                 text-decoration: none;
                 font-size: $N;
+
                 cursor: pointer;
 
                 &.Confirm {
                     margin-left: 0;
-                    background: $blue;
+
+                    @include gradient($blue, #0ba9ec);
                 }
             }
         }

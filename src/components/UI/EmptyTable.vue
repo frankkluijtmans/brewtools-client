@@ -12,7 +12,7 @@
         <p
             class="EmptyTableText"
         >
-            Start creating some recipes to fill up this overview.
+            <slot />
         </p>
     </div>
 </template>

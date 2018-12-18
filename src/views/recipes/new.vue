@@ -9,7 +9,7 @@
 						<table>
 							<tbody>
 								<tr class="TableRow TableHeader">
-									<td>Malt</td>
+									<td>Name</td>
 									<td>Color</td>
 									<td>Volume</td>
 									<td></td>
@@ -32,12 +32,11 @@
 											<input type="number" v-model="fermentable.volume">
 											<label class="InputLabel">grams</label>
 										</td>
-										<td>
+										<td class="RemoveFields">
 											<a 
 												@click="recipe.fermentables.splice(index, 1)"
 												type="button"
-												class="RemoveFields"
-											><i class="fas fa-trash" /></a>
+											><i class="fa fa-trash" /></a>
 										</td>
 									</tr>
 								</template>
@@ -52,7 +51,54 @@
 								})"
 								type="button"
 								class="Button Add"
-							><i class="fas fa-plus" /> Add a grain</button>
+							><i class="fa fa-plus" /> Add a grain</button>
+						</footer>
+					</div>
+
+					<div class="TableContainer Mash">
+						<header>Mashing steps</header>
+						<table>
+							<tbody>
+								<tr class="TableRow TableHeader">
+									<td>Temperature</td>
+									<td>Duration</td>
+									<td></td>
+								</tr>
+								<template 
+									v-for="(step, index) in recipe.mash"
+								>
+									<tr 
+										:key="index"
+										class="TableRow"
+									>
+										<td>
+											<input type="number" v-model="step.temperature">
+											<label class="InputLabel">°C</label>
+										</td>
+										<td>
+											<input type="number" v-model="step.duration">
+											<label class="InputLabel">minutes</label>
+										</td>
+										<td class="RemoveFields">
+											<a 
+												@click="recipe.mash.splice(index, 1)"
+												type="button"
+											><i class="fa fa-trash" /></a>
+										</td>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+						<footer>
+							<button
+								@click="recipe.mash.push({
+									name: '',
+									color: null,
+									volume: null
+								})"
+								type="button"
+								class="Button Add"
+							><i class="fa fa-plus" /> Add a step</button>
 						</footer>
 					</div>
 
@@ -61,7 +107,7 @@
 						<table>
 							<tbody>
 								<tr class="TableRow TableHeader">
-									<td>Kind</td>
+									<td>Name</td>
 									<td>Bitterness</td>
 									<td>Volume</td>
 									<td>Time to boil</td>
@@ -89,12 +135,11 @@
 											<input type="number" v-model="hop.boiling_time">
 											<label class="InputLabel">minutes</label>
 										</td>
-										<td>
+										<td class="RemoveFields">
 											<a 
 												@click="recipe.hops.splice(index, 1)"
 												type="button"
-												class="RemoveFields"
-											><i class="fas fa-trash" /></a>
+											><i class="fa fa-trash" /></a>
 										</td>
 									</tr>
 								</template>
@@ -110,7 +155,52 @@
 								})"
 								type="button"
 								class="Button Add"
-							><i class="fas fa-plus" /> Add a hop</button>
+							><i class="fa fa-plus" /> Add a hop</button>
+						</footer>
+					</div>
+
+					<div class="TableContainer">
+						<header>Other ingredients</header>
+						<table>
+							<tbody>
+								<tr class="TableRow TableHeader">
+									<td>Name</td>
+									<td>Volume</td>
+									<td></td>
+								</tr>
+								<template 
+									v-for="(ingredient, index) in recipe.other"
+								>
+									<tr 
+										:key="index"
+										class="TableRow"
+									>
+										<td>
+											<input type="text" v-model="ingredient.name" placeholder="Name">
+										</td>
+										<td>
+											<input type="number" v-model="ingredient.volume">
+											<label class="InputLabel">grams</label>
+										</td>
+										<td class="RemoveFields">
+											<a 
+												@click="recipe.other.splice(index, 1)"
+												type="button"
+											><i class="fa fa-trash" /></a>
+										</td>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+						<footer>
+							<button
+								@click="recipe.other.push({
+									name: '',
+									volume: null
+								})"
+								type="button"
+								class="Button Add"
+							><i class="fa fa-plus" /> Add an ingredient</button>
 						</footer>
 					</div>
 
@@ -118,12 +208,12 @@
 						type="submit" 
 						class="SaveButton"
 					>
-						<i class="far fa-save"></i> Save recipe
+						Save recipe
 					</button>
 				</div>
 
 				<div class="Sidebar">
-					<div class="TableContainer KeyFacts">
+					<div class="TableContainer">
 						<header>Key facts</header>
 						<table>
 							<tbody>
@@ -153,14 +243,14 @@
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.og" placeholder="Original Gravity">
+										<input type="number" v-model="recipe.og" placeholder="Original gravity(og)">
 									</td>
 								</tr>
 								<tr
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.fg" placeholder="Final Gravity">
+										<input type="number" v-model="recipe.fg" placeholder="Final gravity(fg)">
 									</td>
 								</tr>
 							</tbody>
@@ -169,10 +259,11 @@
 							<ul class="CalculatedKeyFacts">
 								<li>
 									{{ calculatedEbc }}
+									<EBCBadge v-if="calculatedEbc > 0" :ebc="calculatedEbc" /> 
 									<footer>EBC</footer>
 								</li>
 								<li>
-									0
+									{{ calculatedIbu }}
 									<footer>IBU</footer>
 								</li>
 								<li>
@@ -181,6 +272,29 @@
 								</li>	
 							</ul>
 						</footer>
+					</div>
+
+					<div class="TableContainer Yeast">
+						<header>Yeast</header>
+						<table>
+							<tbody>
+								<tr class="TableRow TableHeader">
+									<td>Name</td>
+									<td>Volume</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="text" v-model="recipe.yeast.name" placeholder="Name">
+									</td>
+									<td>
+										<input type="number" v-model="recipe.yeast.volume">
+										<label class="InputLabel">grams</label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 
 					<div class="TableContainer Water">
@@ -192,7 +306,7 @@
 								>
 									<td>
 										<input type="number" v-model="recipe.base_volume" placeholder="Actual volume">
-										<label class="InputLabel">liter</label>
+										<label class="InputLabel">liters</label>
 									</td>
 								</tr>
 								<tr
@@ -200,7 +314,7 @@
 								>
 									<td>
 										<input type="number" v-model="recipe.mash_water" placeholder="Mash water">
-										<label class="InputLabel">liter</label>
+										<label class="InputLabel">liters</label>
 									</td>
 								</tr>
 								<tr
@@ -208,12 +322,13 @@
 								>
 									<td>
 										<input type="number" v-model="recipe.flush_water" placeholder="Flush water">
-										<label class="InputLabel">liter</label>
+										<label class="InputLabel">liters</label>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-					</div>					
+					</div>
+
 				</div>
 			</div>
 		</form>
@@ -224,9 +339,14 @@
 import RecipeRepository from '../../repositories/recipe-repository';
 import ABVHelper from '../../helpers/abv-helper';
 import EBCHelper from '../../helpers/ebc-helper';
+import IBUHelper from '../../helpers/ibu-helper';
+import EBCBadge from '../../components/UI/EBCBadge';
 
 export default {
 	name: 'NewRecipe',
+	components: {
+		EBCBadge
+	},
 	data() {
 		return {
 			recipe: {
@@ -241,7 +361,10 @@ export default {
 				boiling_time: null,
 				mash_water: null,
 				flush_water: null,
-				mash: [],
+				mash: [{
+					temperature: null,
+					duration: null
+				}],
 				hops: [{
 					name: '',
 					bitterness: null,
@@ -253,7 +376,10 @@ export default {
 					color: null,
 					volume: null
 				}],
-				other: [],
+				other: [{
+					name: '',
+					volume: null
+				}],
 				yeast: {
 					name: '',
 					volume: null
@@ -267,9 +393,13 @@ export default {
 
 			return EBCHelper.calculate(this.recipe.fermentables);
 		},
+		calculatedIbu() {
+
+			return IBUHelper.calculate(this.recipe.og, this.recipe.hops, this.recipe.base_volume);
+		},
 		calculatedAbv() {
 
-			if(this.recipe.og !== null && this.recipe.fg !== null) {
+			if(this.recipe.og > 1000 && this.recipe.fg > 1000) {
 				
 				return ABVHelper.calculate(this.recipe.og, this.recipe.fg) + "%";
 			}
@@ -282,6 +412,7 @@ export default {
 		handleSubmit() {
 
 			this.recipe.ebc = this.calculatedEbc;
+			this.recipe.ibu = this.calculatedIbu;
 
 			RecipeRepository.create(this.recipe)
 				.then(() => {
@@ -299,42 +430,20 @@ export default {
 	.SaveButton {
 		display: inline-block;
 		width: 100%;
-		margin-top: 25px;
-		padding: 12px 14px;
+		height: 50px;
+		padding: 0 18px;
 
         border: none;
 		border-radius: 5px;
 		
-		background: $brown;
+		@include gradient($brown, #70401f);
+		box-shadow: 1px 1px 3px $light-color;
 
 		color: $white;
         text-decoration: none;
 		font-size: $N;
+		font-weight: normal;
 		
         cursor: pointer;
-	}
-	
-	.CalculatedKeyFacts {
-		display: flex;
-		width: 100%;
-		flex-direction: row;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-
-		li {
-			flex: 0 0 33.3%;
-			color: $extradark-color;
-			text-align: center;
-			font-size: $XL;
-			font-weight: bold;
-
-			footer {
-				border-top: none;
-				color: $semidark-color;
-				text-align: center;
-				font-weight: normal;
-			}
-		}
 	}
 </style>

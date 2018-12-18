@@ -2,13 +2,15 @@
 @import '_mixins';
 
 .TableContainer {
+    overflow: hidden;
+    margin-bottom: 25px;
+
     border-radius: 5px;
+
     background: $white;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    overflow: hidden;
 
     &.Fermentables {
-        margin-bottom: 25px;
 
         header {
             @include gradient(#773f19, #a26a44);
@@ -22,11 +24,20 @@
         }
     }
 
-    &.KeyFacts {
+    &.Mash {
         
-        margin-bottom: 25px;
+        header {
+            @include gradient(#ad0616, #ea1920);
+        }
     }
 
+    &.Yeast {
+        
+        header {
+            @include gradient(#7a7453, #9c956d);
+        }
+    }
+    
     &.Water {
         
         header {
@@ -123,7 +134,12 @@
     }
 
     .RemoveFields {
-        cursor: pointer;
+        text-align: right;
+        font-size: $N;
+
+        a {
+            cursor: pointer;
+        }
     }
 
     .Button {
@@ -164,4 +180,38 @@
             margin-right: 4px;
         }
     }
+
+    .CalculatedKeyFacts {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			flex: 0 0 33.3%;
+			color: $extradark-color;
+			text-align: center;
+			font-size: $L;
+			font-weight: bold;
+
+			.EBCBadge {
+				position: relative;
+				top: 1px;
+
+				margin-right: 0;
+			}
+
+			footer {
+				padding: 15px 0 0;
+
+				border-top: none;
+
+				color: $semidark-color;
+				text-align: center;
+				font-weight: normal;
+			}
+		}
+	}
 }

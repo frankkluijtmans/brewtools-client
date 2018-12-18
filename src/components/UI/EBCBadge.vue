@@ -16,7 +16,7 @@ export default {
     computed: {
 
         color: function() {
-            console.log(this.ebc);
+
             return EBCHelper.color(parseInt(this.ebc));
         }
     }
