@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      # Dependencies
+      - npm i -g npm
+      - echo "Running dependencies install script"
+      - npm install
+  build:
+    commands:
+      # Build
+      - npm run build
+      # Deploy
+      - touch ./dist/revision.json
+      - echo "{\"timestamp\":\"$(date)\",\"commit\":\"$CODEBUILD_RESOLVED_SOURCE_VERSION\",\"stage\":\""$STAGE\""}" > ./dist/revision.json
+      - aws s3 sync ./dist s3://$BUCKET --cache-control max-age=86400,public
+      # Invalidate cache
+      - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths /index.html /favicon.ico /js/* /css/* /img/*
