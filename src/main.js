@@ -16,7 +16,7 @@ function tokenInterceptor () {
 }
 
 Vue.use(VueKeyCloak, {
-	config: "http://localhost:8080/keycloak.json",
+	config: "/keycloak.json",
 	onReady: () => {
 
 		tokenInterceptor()
