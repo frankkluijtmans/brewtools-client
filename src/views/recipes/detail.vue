@@ -3,106 +3,6 @@
 		<h1 class="PageTitle">{{ recipe.name }} ({{ recipe.style }})</h1>
 
 		<div class="Grid">
-			<div class="MainContent">
-				<div class="TableContainer Fermentables">
-					<header>Fermentables</header>
-					<EmptyTable v-if="recipe.fermentables.length === 0">
-						Edit this recipe to add fermentables.
-					</EmptyTable>
-					<table v-else>
-						<tbody>
-							<tr class="TableRow TableHeader">
-								<td>Malt</td>
-								<td>Color</td>
-								<td>Volume</td>
-							</tr>
-							<tr 
-								v-for="fermentable in recipe.fermentables"
-								:key="fermentable._id"
-								class="TableRow"
-							>
-								<td>{{ fermentable.name }}</td>
-								<td>{{ fermentable.color }} EBC</td>
-								<td>{{ fermentable.volume }} grams</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="TableContainer Mash">
-					<header>Mashing steps</header>
-					<EmptyTable v-if="recipe.mash.length === 0">
-						Edit this recipe to add mashing steps.
-					</EmptyTable>
-					<table v-else>
-						<tbody>
-							<tr class="TableRow TableHeader">
-								<td>Temperature</td>
-								<td>Duration</td>
-							</tr>
-							<tr 
-								v-for="step in recipe.mash"
-								:key="step._id"
-								class="TableRow"
-							>
-								<td>{{ step.temperature }} °C</td>
-								<td>{{ step.duration }} minutes</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="TableContainer Hops">
-					<header>Hops</header>
-					<EmptyTable v-if="recipe.hops.length === 0">
-						Edit this recipe to add hops.
-					</EmptyTable>
-					<table v-else>
-						<tbody>
-							<tr class="TableRow TableHeader">
-								<td>Kind</td>
-								<td>Bitterness</td>
-								<td>Volume</td>
-								<td>Time to boil</td>
-							</tr>
-							<tr 
-								v-for="hop in recipe.hops"
-								:key="hop._id"
-								class="TableRow"
-							>
-								<td>{{ hop.name }}</td>
-								<td>{{ hop.bitterness.$numberDecimal }}%</td>
-								<td>{{ hop.volume }} grams</td>
-								<td>{{ hop.boiling_time }} minutes</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="TableContainer">
-					<header>Other ingredients</header>
-					<EmptyTable v-if="recipe.other.length === 0">
-						Edit this recipe to add other ingredients.
-					</EmptyTable>
-					<table v-else>
-						<tbody>
-							<tr class="TableRow TableHeader">
-								<td>Name</td>
-								<td>Volume</td>
-							</tr>
-							<tr 
-								v-for="ingredient in recipe.other"
-								:key="ingredient._id"
-								class="TableRow"
-							>
-								<td>{{ ingredient.name }}</td>
-								<td>{{ ingredient.volume }} grams</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-			</div>
 
 			<div class="Sidebar">
 
@@ -206,6 +106,108 @@
 				</div>
 
 			</div>
+
+			<div class="MainContent">
+				<div class="TableContainer Fermentables">
+					<header>Fermentables</header>
+					<EmptyTable v-if="recipe.fermentables.length === 0">
+						Edit this recipe to add fermentables.
+					</EmptyTable>
+					<table v-else>
+						<tbody>
+							<tr class="TableRow TableHeader">
+								<td>Malt</td>
+								<td>Color</td>
+								<td>Volume</td>
+							</tr>
+							<tr 
+								v-for="fermentable in recipe.fermentables"
+								:key="fermentable._id"
+								class="TableRow"
+							>
+								<td>{{ fermentable.name }}</td>
+								<td>{{ fermentable.color }} EBC</td>
+								<td>{{ fermentable.volume }} grams</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="TableContainer Mash">
+					<header>Mashing steps</header>
+					<EmptyTable v-if="recipe.mash.length === 0">
+						Edit this recipe to add mashing steps.
+					</EmptyTable>
+					<table v-else>
+						<tbody>
+							<tr class="TableRow TableHeader">
+								<td>Temperature</td>
+								<td>Duration</td>
+							</tr>
+							<tr 
+								v-for="step in recipe.mash"
+								:key="step._id"
+								class="TableRow"
+							>
+								<td>{{ step.temperature }} °C</td>
+								<td>{{ step.duration }} minutes</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="TableContainer Hops">
+					<header>Hops</header>
+					<EmptyTable v-if="recipe.hops.length === 0">
+						Edit this recipe to add hops.
+					</EmptyTable>
+					<table v-else>
+						<tbody>
+							<tr class="TableRow TableHeader">
+								<td>Kind</td>
+								<td>Bitterness</td>
+								<td>Volume</td>
+								<td>Time to boil</td>
+							</tr>
+							<tr 
+								v-for="hop in recipe.hops"
+								:key="hop._id"
+								class="TableRow"
+							>
+								<td>{{ hop.name }}</td>
+								<td>{{ hop.bitterness.$numberDecimal }}%</td>
+								<td>{{ hop.volume }} grams</td>
+								<td>{{ hop.boiling_time }} minutes</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="TableContainer">
+					<header>Other ingredients</header>
+					<EmptyTable v-if="recipe.other.length === 0">
+						Edit this recipe to add other ingredients.
+					</EmptyTable>
+					<table v-else>
+						<tbody>
+							<tr class="TableRow TableHeader">
+								<td>Name</td>
+								<td>Volume</td>
+							</tr>
+							<tr 
+								v-for="ingredient in recipe.other"
+								:key="ingredient._id"
+								class="TableRow"
+							>
+								<td>{{ ingredient.name }}</td>
+								<td>{{ ingredient.volume }} grams</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
 		</div>
 	</div>
 </template>
