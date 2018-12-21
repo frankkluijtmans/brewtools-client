@@ -3,6 +3,126 @@
 		<h1 class="PageTitle">New recipe</h1>
 		<form @submit.prevent="handleSubmit">
 			<div class="Grid">
+
+				<div class="Sidebar">
+					<div class="TableContainer">
+						<header>Key facts</header>
+						<table>
+							<tbody>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="text" v-model="recipe.name" placeholder="Name">
+									</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="text" v-model="recipe.style" placeholder="Style">
+									</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="number" v-model="recipe.boiling_time" placeholder="Boiling time">
+										<label class="InputLabel">minutes</label>
+									</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="number" v-model="recipe.og" placeholder="Original gravity(og)">
+									</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="number" v-model="recipe.fg" placeholder="Final gravity(fg)">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<footer>
+							<ul class="CalculatedKeyFacts">
+								<li>
+									{{ calculatedEbc }}
+									<EBCBadge v-if="calculatedEbc > 0" :ebc="calculatedEbc" /> 
+									<footer>EBC</footer>
+								</li>
+								<li>
+									{{ calculatedIbu }}
+									<footer>IBU</footer>
+								</li>
+								<li>
+									{{ calculatedAbv }}
+									<footer>ABV</footer>
+								</li>	
+							</ul>
+						</footer>
+					</div>
+
+					<div class="TableContainer Yeast">
+						<header>Yeast</header>
+						<table>
+							<tbody>
+								<tr class="TableRow TableHeader">
+									<td>Name</td>
+									<td>Volume</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="text" v-model="recipe.yeast.name" placeholder="Name">
+									</td>
+									<td>
+										<input type="number" v-model="recipe.yeast.volume">
+										<label class="InputLabel">grams</label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="TableContainer Water">
+						<header>Water</header>
+						<table>
+							<tbody>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="number" v-model="recipe.base_volume" placeholder="Actual volume">
+										<label class="InputLabel">liters</label>
+									</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="number" v-model="recipe.mash_water" placeholder="Mash water">
+										<label class="InputLabel">liters</label>
+									</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<input type="number" v-model="recipe.flush_water" placeholder="Flush water">
+										<label class="InputLabel">liters</label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+
 				<div class="MainContent">
 					<div class="TableContainer Fermentables">
 						<header>Fermentables</header>
@@ -212,124 +332,6 @@
 					</button>
 				</div>
 
-				<div class="Sidebar">
-					<div class="TableContainer">
-						<header>Key facts</header>
-						<table>
-							<tbody>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="text" v-model="recipe.name" placeholder="Name">
-									</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="text" v-model="recipe.style" placeholder="Style">
-									</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="number" v-model="recipe.boiling_time" placeholder="Boiling time">
-										<label class="InputLabel">minutes</label>
-									</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="number" v-model="recipe.og" placeholder="Original gravity(og)">
-									</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="number" v-model="recipe.fg" placeholder="Final gravity(fg)">
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<footer>
-							<ul class="CalculatedKeyFacts">
-								<li>
-									{{ calculatedEbc }}
-									<EBCBadge v-if="calculatedEbc > 0" :ebc="calculatedEbc" /> 
-									<footer>EBC</footer>
-								</li>
-								<li>
-									{{ calculatedIbu }}
-									<footer>IBU</footer>
-								</li>
-								<li>
-									{{ calculatedAbv }}
-									<footer>ABV</footer>
-								</li>	
-							</ul>
-						</footer>
-					</div>
-
-					<div class="TableContainer Yeast">
-						<header>Yeast</header>
-						<table>
-							<tbody>
-								<tr class="TableRow TableHeader">
-									<td>Name</td>
-									<td>Volume</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="text" v-model="recipe.yeast.name" placeholder="Name">
-									</td>
-									<td>
-										<input type="number" v-model="recipe.yeast.volume">
-										<label class="InputLabel">grams</label>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
-					<div class="TableContainer Water">
-						<header>Water</header>
-						<table>
-							<tbody>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="number" v-model="recipe.base_volume" placeholder="Actual volume">
-										<label class="InputLabel">liters</label>
-									</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="number" v-model="recipe.mash_water" placeholder="Mash water">
-										<label class="InputLabel">liters</label>
-									</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="number" v-model="recipe.flush_water" placeholder="Flush water">
-										<label class="InputLabel">liters</label>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
-				</div>
 			</div>
 		</form>
 	</div>

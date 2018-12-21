@@ -7,7 +7,8 @@ export default class RecipeRepository {
 
         return new Promise((resolve) => {
 
-            axios.get('http://localhost:3000/recipe/get/' + id, {
+            axios.get(
+                process.env.VUE_APP_API_BASE_URL + '/recipe/get/' + id, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -25,7 +26,8 @@ export default class RecipeRepository {
 
         return new Promise((resolve) => {
 
-            axios.get('http://localhost:3000/recipe/get-all', {
+            axios.get(
+                process.env.VUE_APP_API_BASE_URL + '/recipe/get-all', {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -44,7 +46,7 @@ export default class RecipeRepository {
         return new Promise((resolve) => {
 
             axios.post(
-                'http://localhost:3000/recipe/create',
+                process.env.VUE_APP_API_BASE_URL + '/recipe/create',
                 data
             ).then(() => {
             
@@ -61,7 +63,7 @@ export default class RecipeRepository {
         return new Promise((resolve) => {
 
             axios.post(
-                'http://localhost:3000/recipe/update',
+                process.env.VUE_APP_API_BASE_URL + '/recipe/update',
                 data
             ).then(() => {
             
@@ -78,7 +80,7 @@ export default class RecipeRepository {
         return new Promise((resolve) => {
 
             axios.post(
-                'http://localhost:3000/recipe/delete/' + id
+                process.env.VUE_APP_API_BASE_URL + '/recipe/delete/' + id
             ).then(() => {
 
                 resolve();

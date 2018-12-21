@@ -16,7 +16,7 @@ function tokenInterceptor () {
 }
 
 Vue.use(VueKeyCloak, {
-	config: "/keycloak.json",
+	config: process.env.VUE_APP_KEYCLOAK_CONFIG,
 	onReady: () => {
 
 		tokenInterceptor()
