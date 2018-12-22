@@ -170,7 +170,7 @@
 									volume: null
 								})"
 								type="button"
-								class="Button Add"
+								class="ActionButton Large"
 							><i class="fa fa-plus" /> Add a grain</button>
 						</footer>
 					</div>
@@ -217,7 +217,7 @@
 									volume: null
 								})"
 								type="button"
-								class="Button Add"
+								class="ActionButton Large"
 							><i class="fa fa-plus" /> Add a step</button>
 						</footer>
 					</div>
@@ -274,7 +274,7 @@
 									boiling_time: null
 								})"
 								type="button"
-								class="Button Add"
+								class="ActionButton Large"
 							><i class="fa fa-plus" /> Add a hop</button>
 						</footer>
 					</div>
@@ -319,14 +319,14 @@
 									volume: null
 								})"
 								type="button"
-								class="Button Add"
+								class="ActionButton Large"
 							><i class="fa fa-plus" /> Add an ingredient</button>
 						</footer>
 					</div>
 
 					<button 
 						type="submit" 
-						class="SaveButton"
+						class="Button Brown FullWidth"
 					>
 						Save recipe
 					</button>
@@ -424,28 +424,3 @@ export default {
 	}
 }
 </script>
-
-<style lang="scss" scoped>
-	@import '../../styles/_variables';
-	@import '../../styles/_mixins';
-
-	.SaveButton {
-		display: inline-block;
-		width: 100%;
-		height: 50px;
-		padding: 0 18px;
-
-        border: none;
-		border-radius: 5px;
-		
-		@include gradient($brown, #70401f);
-		box-shadow: 1px 1px 3px $light-color;
-
-		color: $white;
-        text-decoration: none;
-		font-size: $N;
-		font-weight: normal;
-		
-        cursor: pointer;
-	}
-</style>

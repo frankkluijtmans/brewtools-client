@@ -1,5 +1,9 @@
 <template>
-	<div>
+	<div v-if="!loaded">
+		<PageError v-if="error" />
+		<PageLoader v-else />
+	</div>
+	<div v-else>
 		<h1 class="PageTitle">{{ recipe.name }} ({{ recipe.style }})</h1>
 
 		<div class="Grid">
@@ -217,16 +221,22 @@ import RecipeRepository from '../../repositories/recipe-repository';
 import ABVHelper from '../../helpers/abv-helper';
 import EBCBadge from '../../components/UI/EBCBadge';
 import EmptyTable from '../../components/UI/EmptyTable';
+import PageError from '../../components/UI/PageError';
+import PageLoader from '../../components/UI/PageLoader';
 
 export default {
 	name: 'RecipeDetail',
 	components: {
 		EBCBadge,
-		EmptyTable
+		EmptyTable,
+		PageError,
+		PageLoader
 	},
 	data() {
 		return {
-			recipe: {}
+			recipe: {},
+			loaded: false,
+			error: false
 		}
 	},
 	computed: {
@@ -247,20 +257,19 @@ export default {
 			.then(data => {
 
 				this.recipe = data;
+				this.loaded = true;
 			}).catch(() => {
 
 				document.dispatchEvent(
 					new CustomEvent('error_message', {
 						detail: {
-							message: "Failed to fetch this recipe, please try again later."
+							type: "DATA_RETRIEVAL_ERROR"
 						}
 					})
 				)
+
+				this.error = true;
 			})
 	}
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -43,6 +43,7 @@ export default new Router({
 					component: RecipeDetail
 				},
 			]
-		}
+		},
+		{ path: '*', redirect: '/' }
 	]
 })

@@ -1,0 +1,64 @@
+@import './_variables';
+@import './_mixins';
+
+.Button {
+    display: inline-block;
+    height: 50px;
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 5px;
+    
+    @include gradient($semidark-color, #747474);
+    @include shadow();
+
+    color: $white;
+    text-decoration: none;
+    font-size: $N;
+
+    cursor: pointer;
+
+    &.Blue {
+        @include gradient($blue, #0ba9ec);
+    }
+
+    &.Brown {
+        @include gradient($brown, #70401f);
+    }
+
+    &.FullWidth {
+        width: 100%;
+    }
+}
+
+.ActionButton {
+    display: inline-block;
+    padding: 5px 8px;
+
+    border: none;
+    border-radius: 5px;
+    
+    background: $brown;
+
+    color: $white;
+    text-decoration: none;
+    font-size: $SN;
+    
+    cursor: pointer;
+
+    &.Large {
+        padding: 10px 14px;
+    }
+
+    &.Red {
+        background: $red;
+    }
+
+    &.Blue {
+        background: $blue;
+    }
+
+    i {
+        margin-right: 4px;
+    }
+}

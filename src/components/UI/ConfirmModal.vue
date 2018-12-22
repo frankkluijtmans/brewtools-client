@@ -13,7 +13,7 @@
             </p>
             <button 
                 @click="fireEvent('modal_confirmed')"
-                class="Button Confirm"
+                class="Button Blue"
             >Confirm</button>
             <button 
                 @click="fireEvent('modal_canceled')"
@@ -66,6 +66,7 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../styles/_variables';
+    @import '../../styles/_buttons';
     @import '../../styles/_mixins';
 
     .BackDrop {
@@ -119,27 +120,9 @@ export default {
             }
 
             .Button {
-                display: inline-block;
-                height: 50px;
-                margin-left: 10px;
-                padding: 0 18px;
 
-                border: none;
-                border-radius: 5px;
-                
-                @include gradient($semidark-color, #747474);
-                box-shadow: 1px 1px 3px $light-color;
-
-                color: $white;
-                text-decoration: none;
-                font-size: $N;
-
-                cursor: pointer;
-
-                &.Confirm {
-                    margin-left: 0;
-
-                    @include gradient($blue, #0ba9ec);
+                &.Blue {
+                    margin-right: 10px;
                 }
             }
         }

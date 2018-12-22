@@ -45,20 +45,20 @@
 						<td class="Buttons">
 							<router-link
 								:to='"/recipes/detail/" + recipe._id'
-								class="Button View"
+								class="ActionButton Blue"
 							>
 								<i class="fa fa-eye" /> View
 							</router-link>
 							<router-link 
 								:to='"/recipes/edit/" + recipe._id'
-								class="Button Edit"
+								class="ActionButton Blue"
 							>
 								<i class="fa fa-edit" /> Edit
 							</router-link>
 							<a
 								@click="deleteRecipe(recipe._id)"
 								v-if="isOwner(recipe.owner)"
-								class="Button Delete"
+								class="ActionButton Red"
 							>
 								<i class="fa fa-trash" /> Delete
 							</a>
@@ -67,7 +67,9 @@
 				</tbody>
 			</table>
 			<footer>
-				<router-link to="/recipes/new" class="Button New"><i class="fa fa-plus" /> Create a new recipe</router-link>
+				<router-link to="/recipes/new" class="ActionButton Large New">
+					<i class="fa fa-plus" /> Create a new recipe
+				</router-link>
 			</footer>
 		</div>
 		<ConfirmModal ref="confirmDelete">
@@ -103,6 +105,15 @@ export default {
 		RecipeRepository.getAll()
 			.then(response => {
 				this.recipes = response;
+			}).catch(() => {
+
+				document.dispatchEvent(
+					new CustomEvent('error_message', {
+						detail: {
+							type: "DATA_RETRIEVAL_ERROR"
+						}
+					})
+				)
 			})
 	},
 	methods: {
@@ -112,14 +123,25 @@ export default {
 			this.$refs.confirmDelete.showModal().then(() => {
 
 				RecipeRepository.delete(id)
-				.then(() => {
-					
-					for (let i = this.recipes.length - 1; i >= 0; --i) {
-						if (this.recipes[i]._id == id) {
-							this.recipes.splice(i,1);
+					.then(() => {
+						
+						for (let i = this.recipes.length - 1; i >= 0; --i) {
+
+							if (this.recipes[i]._id == id) {
+								
+								this.recipes.splice(i,1);
+							}
 						}
-					}
-				})
+					}).catch(() => {
+
+						document.dispatchEvent(
+							new CustomEvent('error_message', {
+								detail: {
+									type: "OPERATION_FORBIDDEN_ERROR"
+								}
+							})
+						)
+					})
 			});
 		},
 		sortRecipes: function(type) {
@@ -144,4 +166,12 @@ export default {
 
 <style lang="scss">
 	@import '../../styles/_tables';
+	@import '../../styles/_buttons';
+
+	.ActionButton {
+
+		&.New {
+			font-size: $N;
+		}
+	}
 </style>

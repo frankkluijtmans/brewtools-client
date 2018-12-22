@@ -8,7 +8,7 @@
     border-radius: 5px;
 
     background: $white;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    @include shadow();
 
     &.Fermentables {
 
@@ -142,42 +142,11 @@
         }
     }
 
-    .Button {
-        display: inline-block;
+    .ActionButton {
         margin-left: 10px;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 8px;
-        color: $white;
-        background: $blue;
-        text-decoration: none;
-        font-size: $SN;
-        cursor: pointer;
 
         &:first-child {
             margin-left: 0;
-        }
-
-        &.Delete {
-            background: $red;
-        }
-
-        &.New,
-        &.Add {
-            display: inline-block;
-            padding: 10px 14px;
-
-            background: $brown;
-
-            color: $white;
-        }
-
-        &.New {
-            font-size: $N;
-        }
-
-        i {
-            margin-right: 4px;
         }
     }
 

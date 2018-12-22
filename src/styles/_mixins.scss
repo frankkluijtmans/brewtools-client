@@ -1,5 +1,11 @@
+@import '_variables';
+
 @mixin gradient($from, $to) {    
 	background: $from; /* fallback for old browsers */
 	background: -webkit-linear-gradient(to right, $from, $to); /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, $from, $to);
+}
+
+@mixin shadow() {
+	box-shadow: 1px 1px 3px $light-color;
 }

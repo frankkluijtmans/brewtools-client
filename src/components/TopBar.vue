@@ -34,8 +34,7 @@ export default {
 		height: 60px;
 		padding: 0 15px;
 
-		box-shadow: 0 3px 8px rgba(69,101,173,.19);
-
+		@include shadow();
 		@include gradient($primary-color, $secondary-color);
 
 		#logo {

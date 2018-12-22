@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import ErrorDictionary from '../../dictionaries/error-dictionary';
+
 export default {
     name: 'ErrorMessage',
     props: {
@@ -27,11 +29,11 @@ export default {
 
             if(e.detail.message !== '') {
 
-                this.message = e.detail.message;
+                this.message = ErrorDictionary[e.detail.type];
             }
 
             this.show = true;
-            setTimeout(() => this.show = false, 2000);
+            setTimeout(() => this.show = false, 3000);
         })
     }
 }
@@ -39,9 +41,11 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../styles/_variables';
+    @import '../../styles/_mixins';
 
     .ErrorMessage {
         position: fixed;
+        z-index: $PentHouse;
         bottom: 40px;
         left: 50%;
         transform: translate(-50%, 50px);
@@ -55,7 +59,7 @@ export default {
 
         border-radius: 5px;
         background: $white;
-        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        @include shadow();
 
         text-align: center;
 
