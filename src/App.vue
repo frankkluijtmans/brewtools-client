@@ -7,6 +7,7 @@
 				<BreadCrumbs />
 				<router-view></router-view>
 			</div>
+			<ErrorMessage />
 		</div>
 	</div>
 </template>
@@ -15,13 +16,15 @@
 	import MainMenu from '@/components/MainMenu.vue'
 	import TopBar from '@/components/TopBar.vue'
 	import BreadCrumbs from '@/components/BreadCrumbs.vue'
+	import ErrorMessage from '@/components/UI/ErrorMessage.vue'
 
 	export default {
 		name: 'App',
 		components: {
 			MainMenu,
 			TopBar,
-			BreadCrumbs
+			BreadCrumbs,
+			ErrorMessage
 		}
 	}
 </script>

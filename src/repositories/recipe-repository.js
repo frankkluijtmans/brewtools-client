@@ -5,7 +5,7 @@ export default class RecipeRepository {
 
     static get(id){
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
 
             axios.get(
                 process.env.VUE_APP_API_BASE_URL + '/recipe/get/' + id, {
@@ -17,14 +17,14 @@ export default class RecipeRepository {
                 resolve(response.data);
             }).catch(e => {
 
-                console.warn('Recipe repository(get): ' + e);
+                reject('Recipe repository(get): ' + e);
             });
         })
     }
 
     static getAll(){
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
 
             axios.get(
                 process.env.VUE_APP_API_BASE_URL + '/recipe/get-all', {
@@ -36,14 +36,14 @@ export default class RecipeRepository {
                 resolve(response.data.sort(SortingHelper.created));
             }).catch(e => {
 
-                console.warn('Recipe repository(getCollection): ' + e);
+                reject('Recipe repository(getCollection): ' + e);
             });
         })
     }
     
     static create(data){
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
 
             axios.post(
                 process.env.VUE_APP_API_BASE_URL + '/recipe/create',
@@ -53,14 +53,14 @@ export default class RecipeRepository {
                 resolve();
             }).catch(e => {
 
-                console.warn('Recipe repository(create): ' + e);
+                reject('Recipe repository(create): ' + e);
             });
         });
     }
 
     static update(data){
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
 
             axios.post(
                 process.env.VUE_APP_API_BASE_URL + '/recipe/update',
@@ -70,14 +70,14 @@ export default class RecipeRepository {
                 resolve();
             }).catch(e => {
 
-                console.warn('Recipe repository(update): ' + e);
+                reject('Recipe repository(update): ' + e);
             });
         });
     }
 
     static delete(id){
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
 
             axios.post(
                 process.env.VUE_APP_API_BASE_URL + '/recipe/delete/' + id
@@ -86,7 +86,7 @@ export default class RecipeRepository {
                 resolve();
             }).catch(e => {
 
-                console.warn('Recipe repository(delete): ' + e);
+                reject('Recipe repository(delete): ' + e);
             });
         });
     }

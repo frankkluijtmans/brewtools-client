@@ -247,6 +247,15 @@ export default {
 			.then(data => {
 
 				this.recipe = data;
+			}).catch(() => {
+
+				document.dispatchEvent(
+					new CustomEvent('error_message', {
+						detail: {
+							message: "Failed to fetch this recipe, please try again later."
+						}
+					})
+				)
 			})
 	}
 }
