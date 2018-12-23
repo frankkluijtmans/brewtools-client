@@ -1,7 +1,7 @@
 const FieldSchema = {
     fermentableSchema: {
         name: 'Fermentables',
-        singular_label: 'grain',
+        singular_label: 'a fermentable',
         fields: [
             {
                 name: 'name',
@@ -27,7 +27,7 @@ const FieldSchema = {
     },
     hopSchema: {
         name: 'Hops',
-        singular_label: 'hop',
+        singular_label: 'a hop',
         fields: [
             {
                 name: 'name',
@@ -60,7 +60,7 @@ const FieldSchema = {
     },
     mashSchema: {
         name: 'Mashing steps',
-        singular_label: 'step',
+        singular_label: 'a step',
         fields: [
             {
                 name: 'temperature',
@@ -80,7 +80,7 @@ const FieldSchema = {
     },
     otherSchema: {
         name: 'Other ingredients',
-        singular_label: 'ingredient',
+        singular_label: 'an ingredient',
         fields: [
             {
                 name: 'name',

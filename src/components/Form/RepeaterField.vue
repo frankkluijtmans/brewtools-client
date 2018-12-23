@@ -56,7 +56,7 @@
                 })"
                 type="button"
                 class="ActionButton Large"
-            ><i class="fa fa-plus" /> Add a {{ schema.singular_label }}</button>
+            ><i class="fa fa-plus" /> Add {{ schema.singular_label }}</button>
         </footer>
     </div>
 </template>

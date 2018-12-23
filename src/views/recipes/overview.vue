@@ -1,5 +1,9 @@
 <template>
-	<div>
+	<div v-if="!loaded">
+		<PageError v-if="error" />
+		<PageLoader v-else />
+	</div>
+	<div v-else>
 		<h1 class="PageTitle">Your recipes</h1>
 		<div class="TableContainer">
 			<header>Overview</header>
@@ -79,6 +83,8 @@
 </template>
 
 <script>
+import PageError from '../../components/UI/PageError';
+import PageLoader from '../../components/UI/PageLoader';
 import ConfirmModal from '../../components/UI/ConfirmModal';
 import EmptyTable from '../../components/UI/EmptyTable';
 import EBCBadge from '../../components/UI/EBCBadge';
@@ -90,6 +96,8 @@ import moment from 'moment';
 export default {
 	name: 'recipes-overview',
 	components: {
+		PageError,
+		PageLoader,
 		ConfirmModal,
 		EmptyTable,
 		EBCBadge
@@ -97,14 +105,19 @@ export default {
 	data: function() {
 
 		return {
-			recipes: []
+			recipes: [],
+			loaded: false,
+			error: false,
+			animateIn: false
 		}
 	},
 	mounted() {
 
 		RecipeRepository.getAll()
 			.then(response => {
+
 				this.recipes = response;
+				this.loaded = true;
 			}).catch(() => {
 
 				document.dispatchEvent(
@@ -114,6 +127,8 @@ export default {
 						}
 					})
 				)
+				
+				this.error = true;
 			})
 	},
 	methods: {
