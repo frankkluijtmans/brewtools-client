@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Recipes from './views/Recipes.vue'
-import RecipeOverview from './views/recipes/overview.vue'
-import RecipeNew from './views/recipes/new.vue'
-import RecipeEdit from './views/recipes/edit.vue'
-import RecipeDetail from './views/recipes/detail.vue'
+import RecipeOverview from './views/recipes/Overview.vue'
+import RecipeNew from './views/recipes/New.vue'
+import RecipeEdit from './views/recipes/Edit.vue'
+import RecipeDetail from './views/recipes/Detail.vue'
 
 Vue.use(Router)
 

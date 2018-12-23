@@ -124,212 +124,30 @@
 				</div>
 
 				<div class="MainContent">
-					<div class="TableContainer Fermentables">
-						<header>Fermentables</header>
-						<table>
-							<tbody>
-								<tr class="TableRow TableHeader">
-									<td>Name</td>
-									<td>Color</td>
-									<td>Volume</td>
-									<td></td>
-								</tr>
-								<template 
-									v-for="(fermentable, index) in recipe.fermentables"
-								>
-									<tr 
-										:key="index"
-										class="TableRow"
-									>
-										<td>
-											<input type="text" v-model="fermentable.name" placeholder="Name">
-										</td>
-										<td>
-											<input type="number" v-model="fermentable.color">
-											<label class="InputLabel">EBC</label>
-										</td>
-										<td>
-											<input type="number" v-model="fermentable.volume">
-											<label class="InputLabel">grams</label>
-										</td>
-										<td class="RemoveFields">
-											<a 
-												@click="recipe.fermentables.splice(index, 1)"
-												type="button"
-											><i class="fa fa-trash" /></a>
-										</td>
-									</tr>
-								</template>
-							</tbody>
-						</table>
-						<footer>
-							<button
-								@click="recipe.fermentables.push({
-									name: '',
-									color: null,
-									volume: null
-								})"
-								type="button"
-								class="ActionButton Large"
-							><i class="fa fa-plus" /> Add a grain</button>
-						</footer>
-					</div>
 
-					<div class="TableContainer Mash">
-						<header>Mashing steps</header>
-						<table>
-							<tbody>
-								<tr class="TableRow TableHeader">
-									<td>Temperature</td>
-									<td>Duration</td>
-									<td></td>
-								</tr>
-								<template 
-									v-for="(step, index) in recipe.mash"
-								>
-									<tr 
-										:key="index"
-										class="TableRow"
-									>
-										<td>
-											<input type="number" v-model="step.temperature">
-											<label class="InputLabel">°C</label>
-										</td>
-										<td>
-											<input type="number" v-model="step.duration">
-											<label class="InputLabel">minutes</label>
-										</td>
-										<td class="RemoveFields">
-											<a 
-												@click="recipe.mash.splice(index, 1)"
-												type="button"
-											><i class="fa fa-trash" /></a>
-										</td>
-									</tr>
-								</template>
-							</tbody>
-						</table>
-						<footer>
-							<button
-								@click="recipe.mash.push({
-									name: '',
-									color: null,
-									volume: null
-								})"
-								type="button"
-								class="ActionButton Large"
-							><i class="fa fa-plus" /> Add a step</button>
-						</footer>
-					</div>
-
-					<div class="TableContainer Hops">
-						<header>Hops</header>
-						<table>
-							<tbody>
-								<tr class="TableRow TableHeader">
-									<td>Name</td>
-									<td>Bitterness</td>
-									<td>Volume</td>
-									<td>Time to boil</td>
-									<td></td>
-								</tr>
-								<template 
-									v-for="(hop, index) in recipe.hops"
-								>
-									<tr 
-										:key="index"
-										class="TableRow"
-									>
-										<td>
-											<input type="text" v-model="hop.name" placeholder="Name">
-										</td>
-										<td>
-											<input type="number" step="0.01" v-model="hop.bitterness">
-											<label class="InputLabel">%</label>
-										</td>
-										<td>
-											<input type="number" v-model="hop.volume">
-											<label class="InputLabel">grams</label>
-										</td>
-										<td>
-											<input type="number" v-model="hop.boiling_time">
-											<label class="InputLabel">minutes</label>
-										</td>
-										<td class="RemoveFields">
-											<a 
-												@click="recipe.hops.splice(index, 1)"
-												type="button"
-											><i class="fa fa-trash" /></a>
-										</td>
-									</tr>
-								</template>
-							</tbody>
-						</table>
-						<footer>
-							<button
-								@click="recipe.hops.push({
-									name: '',
-									bitterness: null,
-									volume: null,
-									boiling_time: null
-								})"
-								type="button"
-								class="ActionButton Large"
-							><i class="fa fa-plus" /> Add a hop</button>
-						</footer>
-					</div>
-
-					<div class="TableContainer">
-						<header>Other ingredients</header>
-						<table>
-							<tbody>
-								<tr class="TableRow TableHeader">
-									<td>Name</td>
-									<td>Volume</td>
-									<td></td>
-								</tr>
-								<template 
-									v-for="(ingredient, index) in recipe.other"
-								>
-									<tr 
-										:key="index"
-										class="TableRow"
-									>
-										<td>
-											<input type="text" v-model="ingredient.name" placeholder="Name">
-										</td>
-										<td>
-											<input type="number" v-model="ingredient.volume">
-											<label class="InputLabel">grams</label>
-										</td>
-										<td class="RemoveFields">
-											<a 
-												@click="recipe.other.splice(index, 1)"
-												type="button"
-											><i class="fa fa-trash" /></a>
-										</td>
-									</tr>
-								</template>
-							</tbody>
-						</table>
-						<footer>
-							<button
-								@click="recipe.other.push({
-									name: '',
-									volume: null
-								})"
-								type="button"
-								class="ActionButton Large"
-							><i class="fa fa-plus" /> Add an ingredient</button>
-						</footer>
-					</div>
-
+					<RepeaterField 
+						:schema="this.schemas.fermentableSchema"
+						v-model="this.recipe.fermentables" 
+					/>
+					<RepeaterField 
+						:schema="this.schemas.mashSchema"
+						v-model="this.recipe.mash" 
+					/>
+					<RepeaterField 
+						:schema="this.schemas.hopSchema"
+						v-model="this.recipe.hops" 
+					/>
+					<RepeaterField 
+						:schema="this.schemas.otherSchema"
+						v-model="this.recipe.other" 
+					/>
 					<button 
 						type="submit" 
 						class="Button Brown FullWidth"
 					>
 						Save recipe
 					</button>
+
 				</div>
 
 			</div>
@@ -338,7 +156,9 @@
 </template>
 
 <script>
+import RepeaterField from '../../components/Form/RepeaterField';
 import RecipeRepository from '../../repositories/recipe-repository';
+import FieldSchema from '../../schema/field-schema';
 import ABVHelper from '../../helpers/abv-helper';
 import EBCHelper from '../../helpers/ebc-helper';
 import IBUHelper from '../../helpers/ibu-helper';
@@ -347,7 +167,8 @@ import EBCBadge from '../../components/UI/EBCBadge';
 export default {
 	name: 'NewRecipe',
 	components: {
-		EBCBadge
+		EBCBadge,
+		RepeaterField
 	},
 	data() {
 		return {
@@ -386,7 +207,8 @@ export default {
 					name: '',
 					volume: null
 				}
-			}
+			},
+			schemas: FieldSchema
 		}
 	},
 	computed: {

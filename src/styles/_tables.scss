@@ -24,7 +24,7 @@
         }
     }
 
-    &.Mash {
+    &.MashingSteps {
         
         header {
             @include gradient(#ad0616, #ea1920);
@@ -130,15 +130,6 @@
 
                 font-size: $SN;
             }
-        }
-    }
-
-    .RemoveFields {
-        text-align: right;
-        font-size: $N;
-
-        a {
-            cursor: pointer;
         }
     }
 
