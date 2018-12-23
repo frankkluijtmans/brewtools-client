@@ -16,7 +16,11 @@ function tokenInterceptor () {
 }
 
 Vue.use(VueKeyCloak, {
-	config: process.env.VUE_APP_KEYCLOAK_CONFIG,
+	config: {
+		"authRealm": process.env.VUE_APP_KEYCLOAK_AUTH_REALM,
+		"authUrl": process.env.VUE_APP_KEYCLOAK_AUTH_URL,
+		"authClientId": process.env.VUE_APP_KEYCLOAK_AUTH_CLIENT_ID
+	},
 	onReady: () => {
 
 		tokenInterceptor()
