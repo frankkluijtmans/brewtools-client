@@ -1,6 +1,10 @@
 <template>
 	<div id="breadcrumbs">
-        <span v-for="page in currentPath" :key=page.name>
+        <span 
+            v-for="page in currentPath" 
+            :key="page.name"
+            :class="page.name === 'Dashboard' ? 'Light' : ''"
+        >
             <router-link :to=page.path>
                 {{ page.name }}
             </router-link>
@@ -23,6 +27,9 @@ export default {
     @import '../styles/_variables';
 
     #breadcrumbs {
+        position: relative;
+        z-index: $FirstFloor;
+        
         padding: 0 0 15px;
         
         color: $semidark-color;
@@ -36,6 +43,13 @@ export default {
             a {
                 color: $semidark-color;
                 text-decoration: none;
+            }
+
+            &.Light {
+
+                a {
+                    color: $light-color;
+                }
             }
 
             &:before {

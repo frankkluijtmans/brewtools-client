@@ -29,6 +29,9 @@ export default {
 	@import '../styles/_mixins';
 
 	#top-bar {
+		position: relative;
+        z-index: $FirstFloor;
+
 		display: flex;
 		flex-direction: row;
 		height: 60px;

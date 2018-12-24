@@ -137,7 +137,7 @@
 					</table>
 				</div>
 
-				<div class="TableContainer Mash">
+				<div class="TableContainer MashingSteps">
 					<header>Mashing steps</header>
 					<EmptyTable v-if="recipe.mash.length === 0">
 						Edit this recipe to add mashing steps.

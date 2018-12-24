@@ -1,8 +1,8 @@
 <template>
 	<nav id="main-navigation">
 		<header class="NavigationHeading">Main menu</header>
-		<router-link to="/" v-bind:class="this.$route.path === '/' ? 'Active' : ''">Dashboard</router-link>
-		<router-link to="/recipes" v-bind:class="this.$route.path.startsWith('/recipes') ? 'Active' : ''">Recipes</router-link>
+		<router-link to="/" :class="this.$route.path === '/' ? 'Active' : ''">Dashboard</router-link>
+		<router-link to="/recipes" :class="this.$route.path.startsWith('/recipes') ? 'Active' : ''">Recipes</router-link>
 		<header class="NavigationHeading">Account</header>
 		<a href="https://id.brewtools.org/auth/realms/Brewtools/account" target="_blank">Manage account</a>
 		<a @click=this.$keycloak.logoutFn>Logout</a>
@@ -19,6 +19,9 @@ export default {
 	@import '../styles/_variables';
 
 	#main-navigation {
+		position: relative;
+        z-index: $FirstFloor;
+
 		flex: 0 0 250px;
 		margin: 0;
 		min-height: calc(100vh - 60px);
