@@ -22,7 +22,11 @@
 									class="TableRow"
 								>
 									<td>
-										<input type="text" v-model="recipe.style" placeholder="Style">
+										<autocomplete-vue
+											:list="styleCollection"
+											:v-model="recipe.style"
+											placeholder="Style"
+										></autocomplete-vue>
 									</td>
 								</tr>
 								<tr
@@ -167,6 +171,7 @@ import Vue from 'vue';
 import RepeaterField from '../../components/Form/RepeaterField';
 import RecipeRepository from '../../repositories/recipe-repository';
 import YeastRepository from '../../repositories/yeast-repository';
+import StyleRepository from '../../repositories/style-repository';
 import FieldSchema from '../../schema/field-schema';
 import ABVHelper from '../../helpers/abv-helper';
 import EBCHelper from '../../helpers/ebc-helper';
@@ -225,6 +230,10 @@ export default {
 	},
 	computed: {
 
+		styleCollection() {
+
+			return StyleRepository.getAll();
+		},
 		yeastCollection() {
 
 			return YeastRepository.getAll();
