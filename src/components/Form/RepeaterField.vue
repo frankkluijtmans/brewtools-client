@@ -71,6 +71,7 @@
 <script>
 import Vue from 'vue';
 import HopRepository from '../../repositories/hop-repository';
+import FermentableRepository from '../../repositories/fermentable-repository';
 import AutocompleteVue from 'autocomplete-vue';
 
 Vue.component('autocomplete-vue', AutocompleteVue);
@@ -86,7 +87,8 @@ export default {
         collections() {
 
             return {
-                Hops: HopRepository.getAll()
+                Hops: HopRepository.getAll(),
+                Fermentables: FermentableRepository.getAll()
             }
         },
         tableClass() {
