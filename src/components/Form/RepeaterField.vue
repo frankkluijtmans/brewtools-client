@@ -25,7 +25,14 @@
                             v-for="(input, index) in schema.fields"
                             :key="index"
                         >
-                            <input 
+                            <autocomplete-vue
+                                v-if="input.name === 'name'"
+                                :list="collections[schema.name]"
+                                :v-model="item[input.name]"
+                                :placeholder="input.placeholder"
+                            ></autocomplete-vue>
+                            <input
+                                v-else
                                 :type="input.type" 
                                 v-model="item[input.name]" 
                                 :placeholder="input.placeholder"
@@ -62,6 +69,12 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import HopRepository from '../../repositories/hop-repository';
+import AutocompleteVue from 'autocomplete-vue';
+
+Vue.component('autocomplete-vue', AutocompleteVue);
+
 export default {
     name: 'RepeaterField',
     props: {
@@ -70,7 +83,13 @@ export default {
     },
     computed: {
 
-        tableClass: function() {
+        collections() {
+
+            return {
+                Hops: HopRepository.getAll()
+            }
+        },
+        tableClass() {
 
             const words = this.schema.name.split(" ");
             let className = '';

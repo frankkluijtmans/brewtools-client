@@ -260,3 +260,7 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+	@import '../../styles/_autocomplete.scss';
+</style>

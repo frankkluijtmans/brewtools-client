@@ -1,0 +1,12 @@
+@import '_mixins';
+
+.autocomplete__suggestions {
+    border-radius: 0 0 5px 5px;
+    overflow-y: scroll;
+    max-height: 250px;
+    @include shadow();
+
+    .autocomplete__entry {
+        padding: 3px 5px;
+    }
+}
