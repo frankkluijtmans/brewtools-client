@@ -1,7 +1,9 @@
 <template>
 	<div class="recipes">
 		<h1 class="PageTitle">New recipe</h1>
-		<form @submit.prevent="handleSubmit">
+		<form 
+			@submit.prevent="handleSubmit"
+		>
 			<div class="Grid">
 
 				<div class="Sidebar">

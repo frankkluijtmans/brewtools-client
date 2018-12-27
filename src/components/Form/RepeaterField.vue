@@ -26,7 +26,7 @@
                             :key="index"
                         >
                             <autocomplete-vue
-                                v-if="input.name === 'name'"
+                                v-if="input.name === 'name' && collections[schema.name]"
                                 :list="collections[schema.name]"
                                 :v-model="item[input.name]"
                                 :placeholder="input.placeholder"
