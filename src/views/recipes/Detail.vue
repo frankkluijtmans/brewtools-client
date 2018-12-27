@@ -65,24 +65,6 @@
 					</footer>
 				</div>
 
-				<div class="TableContainer Yeast">
-					<header>Yeast</header>
-					<table>
-						<tbody>
-							<tr class="TableRow TableHeader">
-								<td>Name</td>
-								<td>Volume</td>
-							</tr>
-							<tr 
-								class="TableRow"
-							>
-								<td>{{ recipe.yeast.name }}</td>
-								<td>{{ recipe.yeast.volume }} grams</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
 				<div class="TableContainer Water">
 					<header>Water</header>
 					<table>
@@ -182,6 +164,24 @@
 								<td>{{ hop.bitterness.$numberDecimal }}%</td>
 								<td>{{ hop.volume }} grams</td>
 								<td>{{ hop.boiling_time }} minutes</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="TableContainer Yeast">
+					<header>Yeast</header>
+					<table>
+						<tbody>
+							<tr class="TableRow TableHeader">
+								<td>Name</td>
+								<td>Volume</td>
+							</tr>
+							<tr 
+								class="TableRow"
+							>
+								<td>{{ recipe.yeast.name }}</td>
+								<td>{{ recipe.yeast.volume }} grams</td>
 							</tr>
 						</tbody>
 					</table>

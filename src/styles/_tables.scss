@@ -2,7 +2,6 @@
 @import '_mixins';
 
 .TableContainer {
-    overflow: hidden;
     margin-bottom: 25px;
 
     border-radius: 5px;
@@ -46,8 +45,11 @@
     }
 
     header {
-        @include gradient($primary-color, $secondary-color);
         padding: 15px;
+
+        @include gradient($primary-color, $secondary-color);
+        border-radius: 5px 5px 0 0;
+
         color: $white;
         font-size: $N;
     }

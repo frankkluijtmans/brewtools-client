@@ -66,29 +66,6 @@
 						</footer>
 					</div>
 
-					<div class="TableContainer Yeast">
-						<header>Yeast</header>
-						<table>
-							<tbody>
-								<tr class="TableRow TableHeader">
-									<td>Name</td>
-									<td>Volume</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<input type="text" v-model="recipe.yeast.name" placeholder="Name">
-									</td>
-									<td>
-										<input type="number" v-model="recipe.yeast.volume">
-										<label class="InputLabel">grams</label>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
 					<div class="TableContainer Water">
 						<header>Water</header>
 						<table>
@@ -137,6 +114,34 @@
 						:schema="this.schemas.hopSchema"
 						v-model="this.recipe.hops" 
 					/>
+
+					<div class="TableContainer Yeast">
+						<header>Yeast</header>
+						<table>
+							<tbody>
+								<tr class="TableRow TableHeader">
+									<td>Name</td>
+									<td>Volume</td>
+								</tr>
+								<tr
+									class="TableRow"
+								>
+									<td>
+										<autocomplete-vue
+											:list="yeastCollection"
+											:v-model="recipe.yeast.name"
+											placeholder="Name"
+										></autocomplete-vue>
+									</td>
+									<td>
+										<input type="number" v-model="recipe.yeast.volume">
+										<label class="InputLabel">grams</label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
 					<RepeaterField 
 						:schema="this.schemas.otherSchema"
 						v-model="this.recipe.other" 
@@ -156,13 +161,18 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import RepeaterField from '../../components/Form/RepeaterField';
 import RecipeRepository from '../../repositories/recipe-repository';
+import YeastRepository from '../../repositories/yeast-repository';
 import FieldSchema from '../../schema/field-schema';
 import ABVHelper from '../../helpers/abv-helper';
 import EBCHelper from '../../helpers/ebc-helper';
 import IBUHelper from '../../helpers/ibu-helper';
 import EBCBadge from '../../components/UI/EBCBadge';
+import AutocompleteVue from 'autocomplete-vue';
+
+Vue.component('autocomplete-vue', AutocompleteVue);
 
 export default {
 	name: 'NewRecipe',
@@ -213,6 +223,10 @@ export default {
 	},
 	computed: {
 
+		yeastCollection() {
+
+			return YeastRepository.getAll();
+		},
 		calculatedEbc() {
 
 			return EBCHelper.calculate(this.recipe.fermentables);
