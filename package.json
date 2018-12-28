@@ -1,7 +1,13 @@
 {
 	"name": "brewtools-client",
-	"version": "0.1.0",
-	"private": true,
+	"version": "1.0.0",
+	"description": "This is the browser client for Brewtools.",
+	"author": "Frank Kluijtmans",
+  	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/frankkluijtmans/brewtools-client.git"
+	},
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",

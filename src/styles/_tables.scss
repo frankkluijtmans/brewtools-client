@@ -94,6 +94,7 @@
             position: relative;
 
             padding: 12px 10px;
+            line-height: 25px;
 
             font-size: $SN;
             color: $dark-color;
@@ -123,8 +124,14 @@
 
                 font-size: $SN;
             }
+            
+            select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+            }
 
-            .InputLabel {
+            .InputLabel,
+            .SelectBoxIcon {
                 position: absolute;
                 right: 30px;
                 top: 50%;
@@ -132,6 +139,11 @@
                 transform: translateY(-50%);
 
                 font-size: $SN;
+            }
+
+            .SelectBoxIcon {
+                right: 10px;
+                font-size: 18px;
             }
         }
     }
@@ -153,7 +165,9 @@
 		padding: 0;
 
 		li {
-			flex: 0 0 33.3%;
+            padding: 10px;
+            flex: 0 0 33.3%;
+            
 			color: $extradark-color;
 			text-align: center;
 			font-size: $L;

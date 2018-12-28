@@ -56,6 +56,8 @@ export default {
 			margin-left: auto;	
 			margin-right: 15px;
 
+			font-size: $N;
+
 			.UserImage {
 				height: 36px;
 				width: 36px;

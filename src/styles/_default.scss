@@ -3,6 +3,10 @@
 * {
     box-sizing: border-box;
     font-family: $primary-font;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 html {
@@ -15,7 +19,7 @@ body {
 }
 
 h1 {
-    font-size: $XXL;
+    font-size: $XL;
     font-weight: 300;
 
     &.PageTitle {

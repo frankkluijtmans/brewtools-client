@@ -9,3 +9,33 @@
 @mixin shadow() {
 	box-shadow: 1px 1px 3px $light-color;
 }
+
+@mixin Breakpoint($Arguments...){
+
+	@each $Parameter in $Arguments{
+		/* 480px / 16px = 30rem */
+		@if $Parameter == Small {
+
+			@media #{all} and (max-width: 480px) { @content; }
+		}
+		/* 481px / 16px = 30.063rem and 768px / 16px = 48rem */
+		@else if $Parameter == Medium{
+
+			@media #{all} and (min-width: 481px) and (max-width: 768px) { @content; }
+		}
+		/* 769px / 16px = 48.063rem and 1024px / 16px = 64rem */
+		@else if $Parameter == Large{
+
+			@media #{all} and (min-width: 769px) and (max-width: 1024px) { @content; }
+		}
+		/* 1025px / 16px = 64.0625rem */
+		@else if $Parameter == ExtraLarge{
+
+			@media #{all} and (min-width: 1025px) { @content; }
+		}
+		@else{
+
+			@error 'Please use a valid breakpoint!';
+		}
+	}
+}

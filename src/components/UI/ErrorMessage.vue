@@ -46,12 +46,13 @@ export default {
     .ErrorMessage {
         position: fixed;
         z-index: $PentHouse;
-        bottom: 40px;
-        left: 50%;
-        transform: translate(-50%, 50px);
+        bottom: 25px;
+        left: 25px;
+        transform: translate(0, 50px);
         transition: all 0.5s ease-out;
         
-        max-width: calc(100vw - 50px);
+        box-sizing: border-box;
+        width: calc(100% - 50px);
         padding: 15px 20px 15px 70px;
         overflow: hidden;
     
@@ -62,10 +63,26 @@ export default {
         @include shadow();
 
         text-align: center;
+        font-size: $N;
+
+        @include Breakpoint(Large, ExtraLarge) {
+
+            bottom: 40px;
+            left: 50%;
+
+            width: auto;
+
+            transform: translate(-50%, 50px);
+        }
 
         &.isVisible {
             opacity: 1;
-            transform: translate(-50%, 0);
+            transform: translate(0, 0);
+
+            @include Breakpoint(Large, ExtraLarge) {
+
+                transform: translate(-50%, 0);
+            }
         }
 
         .ErrorMessageIcon {

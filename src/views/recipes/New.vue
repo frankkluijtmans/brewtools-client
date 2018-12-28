@@ -39,6 +39,7 @@
 												{{ style.name }}
 											</option>
 										</select>
+										<i class="fa fa-caret-down SelectBoxIcon" />
 									</td>
 								</tr>
 								<tr
@@ -187,7 +188,7 @@
 									</td>
 									<td>
 										<input type="number" v-model="recipe.yeast.volume">
-										<label class="InputLabel">grams</label>
+										<label class="InputLabel">grams/mil</label>
 									</td>
 								</tr>
 							</tbody>
