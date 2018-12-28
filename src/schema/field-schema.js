@@ -39,7 +39,7 @@ const FieldSchema = {
                 name: 'bitterness',
                 header: 'Bitterness',
                 placeholder: '',
-                type: 'number',
+                type: 'float',
                 unit_label: '%'
             },
             {

@@ -25,24 +25,41 @@
                             v-for="(input, index) in schema.fields"
                             :key="index"
                         >
-                            <autocomplete-vue
+                            <AutoComplete
                                 v-if="input.name === 'name' && collections[schema.name]"
-                                :list="collections[schema.name]"
                                 :v-model="item[input.name]"
+                                @input="item[input.name] = $event"
+                                :list="collections[schema.name]"
                                 :placeholder="input.placeholder"
-                            ></autocomplete-vue>
-                            <input
-                                v-else
-                                :type="input.type" 
-                                v-model="item[input.name]" 
-                                :placeholder="input.placeholder"
+                                :required="true"
                             />
-                            <label
-                                v-if="input.unit_label" 
-                                class="InputLabel"
-                            >
-                                {{ input.unit_label }}
-                            </label>
+                            <div v-else>
+                                <input
+                                    v-if="input.type === 'number'"
+                                    min="0"
+                                    :type="input.type" 
+                                    v-model="item[input.name]" 
+                                />
+                                <input
+                                    v-else-if="input.type === 'float'"
+                                    step="0.1"
+                                    min="0"
+                                    type="number" 
+                                    v-model="item[input.name]" 
+                                />
+                                <input
+                                    v-else
+                                    :type="input.type" 
+                                    v-model="item[input.name]" 
+                                    :placeholder="input.placeholder"
+                                />
+                                <label
+                                    v-if="input.unit_label" 
+                                    class="InputLabel"
+                                >
+                                    {{ input.unit_label }}
+                                </label>
+                            </div>
                         </td>
                         <td class="RemoveFields">
                             <a 
@@ -56,11 +73,7 @@
         </table>
         <footer>
             <button
-                @click="value.push({
-                    name: '',
-                    color: null,
-                    volume: null
-                })"
+                @click="value.push(newRow())"
                 type="button"
                 class="ActionButton Large"
             ><i class="fa fa-plus" /> Add {{ schema.singular_label }}</button>
@@ -69,15 +82,15 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import HopRepository from '../../repositories/hop-repository';
 import FermentableRepository from '../../repositories/fermentable-repository';
-import AutocompleteVue from 'autocomplete-vue';
-
-Vue.component('autocomplete-vue', AutocompleteVue);
+import AutoComplete from '../../components/Form/AutoComplete';
 
 export default {
     name: 'RepeaterField',
+    components: {
+        AutoComplete
+    },
     props: {
         value: Array,
         schema: Object
@@ -102,6 +115,20 @@ export default {
             })
             
             return className;
+        }
+    },
+    methods: {
+        
+        newRow() {
+
+            let row = {};
+
+            this.schema.fields.forEach(property => {
+
+                row[property.name] = (property.type === 'text') ? '' : null;
+            })
+
+            return row;
         }
     }
 }

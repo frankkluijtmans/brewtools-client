@@ -73,19 +73,19 @@
 								class="TableRow"
 							>
 								<td><strong>Actual volume</strong></td> 
-								<td>{{ recipe.base_volume }} liters</td>
+								<td>{{ recipe.base_volume.$numberDecimal }} liters</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
 								<td><strong>Mash water</strong></td>
-								<td>{{ recipe.mash_water }} liters</td>
+								<td>{{ recipe.mash_water.$numberDecimal }} liters</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
 								<td><strong>Flush water</strong></td>
-								<td>{{ recipe.flush_water }} liters</td>
+								<td>{{ recipe.flush_water.$numberDecimal }} liters</td>
 							</tr>
 						</tbody>
 					</table>

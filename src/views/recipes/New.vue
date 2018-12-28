@@ -22,18 +22,35 @@
 									class="TableRow"
 								>
 									<td>
-										<autocomplete-vue
-											:list="styleCollection"
-											:v-model="recipe.style"
-											placeholder="Style"
-										></autocomplete-vue>
+										<select
+											v-model="recipe.style"
+										>
+											<option 
+												disabled
+												selected
+												value=''
+											>
+												Style
+											</option>
+											<option 
+												v-for="style in styleCollection"
+												:key="style.name"
+											>
+												{{ style.name }}
+											</option>
+										</select>
 									</td>
 								</tr>
 								<tr
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.boiling_time" placeholder="Boiling time">
+										<input 
+											type="number"
+											min="0"
+											v-model="recipe.boiling_time"
+											placeholder="Boiling time"
+										>
 										<label class="InputLabel">minutes</label>
 									</td>
 								</tr>
@@ -41,14 +58,24 @@
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.og" placeholder="Original gravity(og)">
+										<input 
+											type="number"
+											min="1000"
+											v-model="recipe.og"
+											placeholder="Original gravity(og)"
+										>
 									</td>
 								</tr>
 								<tr
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.fg" placeholder="Final gravity(fg)">
+										<input 
+											type="number"
+											min="1000"
+											v-model="recipe.fg"
+											placeholder="Final gravity(fg)"
+										>
 									</td>
 								</tr>
 							</tbody>
@@ -80,7 +107,13 @@
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.base_volume" placeholder="Actual volume">
+										<input 
+											type="number"
+											min="0"
+											step="0.1"
+											v-model="recipe.base_volume" 
+											placeholder="Actual volume"
+										>
 										<label class="InputLabel">liters</label>
 									</td>
 								</tr>
@@ -88,7 +121,13 @@
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.mash_water" placeholder="Mash water">
+										<input 
+											type="number"
+											min="0"
+											step="0.1"
+											v-model="recipe.mash_water"
+											placeholder="Mash water"
+										>
 										<label class="InputLabel">liters</label>
 									</td>
 								</tr>
@@ -96,7 +135,13 @@
 									class="TableRow"
 								>
 									<td>
-										<input type="number" v-model="recipe.flush_water" placeholder="Flush water">
+										<input
+											type="number"
+											min="0"
+											step="0.1"
+											v-model="recipe.flush_water"
+											placeholder="Flush water"
+										>
 										<label class="InputLabel">liters</label>
 									</td>
 								</tr>
@@ -133,11 +178,12 @@
 									class="TableRow"
 								>
 									<td>
-										<autocomplete-vue
-											:list="yeastCollection"
+										<AutoComplete
 											:v-model="recipe.yeast.name"
-											placeholder="Name"
-										></autocomplete-vue>
+											@input="recipe.yeast.name = $event"
+											:list="yeastCollection"
+											:placeholder="'Name'"
+										/>
 									</td>
 									<td>
 										<input type="number" v-model="recipe.yeast.volume">
@@ -167,8 +213,8 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import RepeaterField from '../../components/Form/RepeaterField';
+import AutoComplete from '../../components/Form/AutoComplete';
 import RecipeRepository from '../../repositories/recipe-repository';
 import YeastRepository from '../../repositories/yeast-repository';
 import StyleRepository from '../../repositories/style-repository';
@@ -177,15 +223,13 @@ import ABVHelper from '../../helpers/abv-helper';
 import EBCHelper from '../../helpers/ebc-helper';
 import IBUHelper from '../../helpers/ibu-helper';
 import EBCBadge from '../../components/UI/EBCBadge';
-import AutocompleteVue from 'autocomplete-vue';
-
-Vue.component('autocomplete-vue', AutocompleteVue);
 
 export default {
 	name: 'NewRecipe',
 	components: {
 		EBCBadge,
-		RepeaterField
+		RepeaterField,
+		AutoComplete
 	},
 	data() {
 		return {
@@ -271,7 +315,3 @@ export default {
 	}
 }
 </script>
-
-<style lang="scss">
-	@import '../../styles/_autocomplete.scss';
-</style>

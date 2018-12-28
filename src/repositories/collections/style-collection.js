@@ -198,7 +198,7 @@ const StyleCollection = [
         name: "Honey Beer"
     },
     {
-        name: "Imperial India Pale Ale"
+        name: "Imperial IPA"
     },
     {
         name: "Irish-Style Dry Stout"
@@ -222,7 +222,7 @@ const StyleCollection = [
         name: "Scotch Ale/Wee Heavy"
     },
     {
-        name: "Session India Pale Ale"
+        name: "Session IPA"
     },
     {
         name: "Smoke Beer"
@@ -237,7 +237,19 @@ const StyleCollection = [
         name: "Vienna-Style Lager"
     },
     {
-        name: "Chili Spiced Ale"
+        name: "Chili Stout"
+    },
+    {
+        name: "Russian Imperial Stout"
+    },
+    {
+        name: "Belgian IPA"
+    },
+    {
+        name: "Black IPA"
+    },
+    {
+        name: "India Pale Ale"
     }
 ];
 

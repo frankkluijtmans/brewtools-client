@@ -3,12 +3,16 @@ export default class IBUHelper {
     static calculate(og, hops, base_volume) {
 
         let totalIbu = 0;
-        og = parseInt(og);
-        base_volume = parseInt(base_volume);
+        og = og !== null ? parseInt(og) : null;
+        base_volume = base_volume !== null ? parseFloat(base_volume) : null;
 
         hops.forEach(hop => {
 
-            if(hop.bitterness !== null && hop.volume !== null && hop.boiling_time !== null) {
+            if(hop.bitterness !== null 
+                && hop.volume !== null 
+                && hop.boiling_time !== null
+                && base_volume !== null
+                && og !== null) {
                 
                 hop.bitterness = parseFloat(hop.bitterness);
                 hop.boiling_time = parseInt(hop.boiling_time);
