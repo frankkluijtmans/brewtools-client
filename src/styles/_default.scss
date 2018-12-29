@@ -23,7 +23,19 @@ h1 {
     font-weight: 300;
 
     &.PageTitle {
+        position: relative;
+
         margin: 20px 0;
+
+        .Actions {
+            position: absolute;
+            right: 0;
+            top: -8px;
+
+            .Button {
+                margin-left: 10px;
+            }
+        }
     }
 }
 
@@ -44,5 +56,36 @@ h1 {
 
     .Sidebar {
         flex: 0 0 35%;
+    }
+}
+
+@media print {
+
+    * {
+        -webkit-print-color-adjust: exact;
+    }
+
+    #main-navigation,
+    #top-bar,
+    .PageTitle .Actions,
+    #breadcrumbs {
+        display: none !important;
+    }
+
+    .Grid {
+        flex-direction: column;
+
+        .MainContent {
+            flex: 0 0 100%;
+            padding-left: 0;
+        }
+
+        .TableContainer {
+
+            header {
+                background: #666 !important;
+                color: #fff !important;
+            }
+        }
     }
 }

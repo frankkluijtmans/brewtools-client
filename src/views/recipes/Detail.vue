@@ -4,7 +4,24 @@
 		<PageLoader v-else />
 	</div>
 	<div v-else>
-		<h1 class="PageTitle">{{ recipe.name }} ({{ recipe.style }})</h1>
+		<h1 class="PageTitle">
+			{{ recipe.name }}
+			<div class="Actions">
+				<button 
+					@click="printRecipe()"
+					class="Button Blue"
+				>
+					<i class="fa fa-print"></i>	Print
+				</button>
+				<router-link 
+					:to="'/recipes/edit/' + recipe._id"
+					tag="button"
+					class="Button"
+				>
+					<i class="fa fa-edit"></i>	Edit
+				</router-link>
+			</div>
+		</h1>
 
 		<div class="Grid">
 
@@ -270,6 +287,13 @@ export default {
 
 				this.error = true;
 			})
+	},
+	methods: {
+
+		printRecipe() {
+
+			window.print();
+		}
 	}
 }
 </script>
