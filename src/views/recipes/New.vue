@@ -187,8 +187,26 @@
 										/>
 									</td>
 									<td>
-										<input type="number" v-model="recipe.yeast.volume">
-										<label class="InputLabel">grams/mil</label>
+										<input 
+											min="0" 
+											type="number" 
+											v-model="recipe.yeast.volume.amount"
+										/>
+										<select
+											v-model="recipe.yeast.volume.unit"	
+											class="InputLabel"
+										>
+											<option 
+												selected
+												value="grams"
+											>
+												grams
+											</option>
+											<option>
+												millilitres
+											</option>
+										</select>
+										<i class="fa fa-caret-down SelectBoxIcon" />
 									</td>
 								</tr>
 							</tbody>
@@ -254,7 +272,10 @@ export default {
 					name: '',
 					bitterness: null,
 					volume: null,
-					boiling_time: null
+					usage: {
+						amount: null,
+						unit: 'minutes/boil'
+					}
 				}],
 				fermentables: [{
 					name: '',
@@ -267,7 +288,10 @@ export default {
 				}],
 				yeast: {
 					name: '',
-					volume: null
+					volume: {
+						amount: null,
+						unit: 'grams'
+					}
 				}
 			},
 			schemas: FieldSchema

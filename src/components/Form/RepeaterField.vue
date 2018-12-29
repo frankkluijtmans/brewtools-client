@@ -34,31 +34,54 @@
                                 :required="true"
                             />
                             <div v-else>
-                                <input
-                                    v-if="input.type === 'number'"
-                                    min="0"
-                                    :type="input.type" 
-                                    v-model="item[input.name]" 
-                                />
-                                <input
-                                    v-else-if="input.type === 'float'"
-                                    step="0.1"
-                                    min="0"
-                                    type="number" 
-                                    v-model="item[input.name]" 
-                                />
-                                <input
-                                    v-else
-                                    :type="input.type" 
-                                    v-model="item[input.name]" 
-                                    :placeholder="input.placeholder"
-                                />
-                                <label
-                                    v-if="input.unit_label" 
-                                    class="InputLabel"
+                                <div 
+                                    v-if="input.unit_label && input.unit_label.constructor === Array"
                                 >
-                                    {{ input.unit_label }}
-                                </label>
+                                    <input
+                                        min="0"
+                                        type="number" 
+                                        v-model="item[input.name].amount" 
+                                    />
+                                    <select
+                                        class="InputLabel"
+                                        v-model="item[input.name].unit" 
+                                    >
+                                        <option 
+                                            v-for="(label, index) in input.unit_label"
+                                            :key="index"
+                                        >
+                                            {{ label }}
+                                        </option>
+                                    </select>
+                                    <i class="fa fa-caret-down SelectBoxIcon" />
+                                </div>
+                                <div v-else>
+                                    <input
+                                        v-if="input.type === 'number'"
+                                        min="0"
+                                        :type="input.type" 
+                                        v-model="item[input.name]" 
+                                    />
+                                    <input
+                                        v-else-if="input.type === 'float'"
+                                        step="0.1"
+                                        min="0"
+                                        type="number" 
+                                        v-model="item[input.name]" 
+                                    />
+                                    <input
+                                        v-else
+                                        :type="input.type" 
+                                        v-model="item[input.name]" 
+                                        :placeholder="input.placeholder"
+                                    />
+                                    <label 
+                                        v-if="input.unit_label"
+                                        class="InputLabel"
+                                    >
+                                        {{ input.unit_label }}
+                                    </label>
+                                </div>
                             </div>
                         </td>
                         <td class="RemoveFields">
@@ -125,9 +148,20 @@ export default {
 
             this.schema.fields.forEach(property => {
 
+                if(property.unit_label 
+                    && property.unit_label.constructor === Array) {
+
+                    row[property.name] = {
+                        amount: null,
+                        unit: property.unit_label[0]
+                    }
+
+                    return;
+                }
+
                 row[property.name] = (property.type === 'text') ? '' : null;
             })
-
+            
             return row;
         }
     }

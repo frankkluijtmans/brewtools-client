@@ -50,11 +50,11 @@ const FieldSchema = {
                 unit_label: 'grams'
             },
             {
-                name: 'boiling_time',
-                header: 'Time to boil',
+                name: 'usage',
+                header: 'Usage',
                 placeholder: '',
                 type: 'number',
-                unit_label: 'minutes'
+                unit_label: ['minutes/boil', 'days/dryhop']
             }
         ]
     },

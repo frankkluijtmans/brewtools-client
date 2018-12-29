@@ -10,12 +10,13 @@ export default class IBUHelper {
 
             if(hop.bitterness !== null 
                 && hop.volume !== null 
-                && hop.boiling_time !== null
+                && hop.usage.unit === 'minutes/boil'
+                && hop.usage.amount !== null
                 && base_volume !== null
                 && og !== null) {
                 
                 hop.bitterness = parseFloat(hop.bitterness);
-                hop.boiling_time = parseInt(hop.boiling_time);
+                hop.usage.amount = parseInt(hop.usage.amount);
                 hop.volume = parseInt(hop.volume)
 
                 totalIbu += this.alphaAcidUtilization(hop, og) * this.addedAlphaAcids(hop, base_volume);
@@ -32,7 +33,7 @@ export default class IBUHelper {
 
     static alphaAcidUtilization(hop, og) {
 
-        return this.bignessFactor(og) * this.boilTimeFactor(hop.boiling_time);
+        return this.bignessFactor(og) * this.boilTimeFactor(hop.usage.amount);
     }
     
     static boilTimeFactor(boiling_time) {

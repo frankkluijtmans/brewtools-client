@@ -115,6 +115,8 @@
 
             input,
             select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
                 width: 100%;
                 height: 25px;
                 line-height: 25px;
@@ -123,11 +125,10 @@
                 background: none;
 
                 font-size: $SN;
-            }
-            
-            select {
-                -webkit-appearance: none;
-                -moz-appearance: none;
+
+                &.InputLabel{
+                    width: auto;
+                }
             }
 
             .InputLabel,

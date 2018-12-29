@@ -170,7 +170,7 @@
 								<td>Kind</td>
 								<td>Bitterness</td>
 								<td>Volume</td>
-								<td>Time to boil</td>
+								<td>Usage</td>
 							</tr>
 							<tr 
 								v-for="hop in recipe.hops"
@@ -180,7 +180,7 @@
 								<td>{{ hop.name }}</td>
 								<td>{{ hop.bitterness.$numberDecimal }}%</td>
 								<td>{{ hop.volume }} grams</td>
-								<td>{{ hop.boiling_time }} minutes</td>
+								<td>{{ hop.usage.amount }} {{ hop.usage.unit }}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -198,7 +198,7 @@
 								class="TableRow"
 							>
 								<td>{{ recipe.yeast.name }}</td>
-								<td>{{ recipe.yeast.volume }} grams</td>
+								<td>{{ recipe.yeast.volume.amount }} {{ recipe.yeast.volume.unit }}</td>
 							</tr>
 						</tbody>
 					</table>
