@@ -174,7 +174,7 @@ const StyleCollection = [
         name: "German-Style Helles"
     },
     {
-        name: "German-Style Kolsch"
+        name: "German-Style Kölsch"
     },
     {
         name: "German-Style Marzen / Oktoberfest"

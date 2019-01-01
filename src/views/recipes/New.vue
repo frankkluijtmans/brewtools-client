@@ -154,7 +154,7 @@
 
 				<div class="MainContent">
 
-					<RepeaterField 
+					<RepeaterField
 						:schema="this.schemas.fermentableSchema"
 						v-model="this.recipe.fermentables" 
 					/>
@@ -255,7 +255,6 @@ export default {
 			recipe: {
 				name: '',
 				style: '',
-				collaborators: [],
 				og: null,
 				fg: null,
 				ibu: null,
