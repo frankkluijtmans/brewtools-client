@@ -36,7 +36,7 @@ export default class RecipeRepository {
                 resolve(response.data.sort(SortingHelper.created));
             }).catch(e => {
 
-                reject('Recipe repository(getCollection): ' + e);
+                reject('Recipe repository(getAll): ' + e);
             });
         })
     }
@@ -58,12 +58,12 @@ export default class RecipeRepository {
         });
     }
 
-    static update(data){
+    static update(data, id){
 
         return new Promise((resolve, reject) => {
 
             axios.post(
-                process.env.VUE_APP_API_BASE_URL + '/recipe/update',
+                process.env.VUE_APP_API_BASE_URL + '/recipe/update/' + id,
                 data
             ).then(() => {
             

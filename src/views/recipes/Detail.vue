@@ -110,7 +110,8 @@
 
 			</div>
 
-			<div class="MainContent">
+			<div class="MainContent Last">
+
 				<div class="TableContainer Fermentables">
 					<header>Fermentables</header>
 					<EmptyTable v-if="recipe.fermentables.length === 0">

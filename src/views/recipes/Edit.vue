@@ -169,7 +169,7 @@
 
 				</div>
 
-				<div class="MainContent">
+				<div class="MainContent Last">
 
 					<RepeaterField
 						:schema="this.schemas.fermentableSchema"
@@ -340,7 +340,7 @@ export default {
 			this.recipe.ebc = this.calculatedEbc;
 			this.recipe.ibu = this.calculatedIbu;
 
-			RecipeRepository.update(this.recipe)
+			RecipeRepository.update(this.recipe, this.recipe._id)
 				.then(() => {
 					alert('recipe saved');
 				})

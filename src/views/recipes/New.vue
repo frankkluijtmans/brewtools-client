@@ -152,7 +152,7 @@
 
 				</div>
 
-				<div class="MainContent">
+				<div class="MainContent Last">
 
 					<RepeaterField
 						:schema="this.schemas.fermentableSchema"

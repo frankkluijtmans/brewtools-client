@@ -51,11 +51,15 @@ h1 {
 
     .MainContent {
         flex: 0 0 65%;
-        padding-left: 25px;
     }
 
     .Sidebar {
         flex: 0 0 35%;
+    }
+
+    .Last {
+
+        padding-left: 25px;
     }
 }
 

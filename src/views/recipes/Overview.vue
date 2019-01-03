@@ -38,7 +38,7 @@
 							<EBCBadge :ebc="recipe.ebc" />
 							{{ recipe.name }}
 							<i
-								v-if="!isOwner(recipe.owner)"
+								v-if="!isOwner(recipe.owner.email)"
 							>
 								(Shared)
 							</i>
@@ -61,7 +61,7 @@
 							</router-link>
 							<a
 								@click="deleteRecipe(recipe._id)"
-								v-if="isOwner(recipe.owner)"
+								v-if="isOwner(recipe.owner.email)"
 								class="ActionButton Red"
 							>
 								<i class="fa fa-trash" /> Delete
