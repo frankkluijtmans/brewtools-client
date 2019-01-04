@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import NotFound from './views/NotFound.vue'
 import Recipes from './views/Recipes.vue'
 import RecipeOverview from './views/recipes/Overview.vue'
 import RecipeNew from './views/recipes/New.vue'
@@ -16,6 +17,11 @@ export default new Router({
 			path: '/',
 			name: 'Dashboard',
 			component: Home
+		},
+		{
+			path: '/404',
+			name: 'Page not found',
+			component: NotFound
 		},
 		{
 			path: '/recipes',
@@ -44,6 +50,6 @@ export default new Router({
 				},
 			]
 		},
-		{ path: '*', redirect: '/' }
+		{ path: '*', redirect: '/404' }
 	]
 })

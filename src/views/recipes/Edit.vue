@@ -9,7 +9,10 @@
 	>
 		<h1 class="PageTitle">
 			Edit {{ recipe.name }}
-			<div class="Actions">
+			<div 
+				v-if="isOwner(recipe.owner.email)"
+				class="Actions"
+			>
 				<button 
 					@click="openInviteModal()"
 					class="Button Blue"
@@ -350,6 +353,10 @@ export default {
 		openInviteModal() {
 
 			this.$refs.inviteModal.showModal();
+		},
+		isOwner(user) {
+
+			return user === this.$keycloak.userName;
 		}
 	}
 }

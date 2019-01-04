@@ -133,7 +133,7 @@ export default {
 	},
 	methods: {
 
-		deleteRecipe: function(id) {
+		deleteRecipe(id) {
 
 			this.$refs.confirmDelete.showModal().then(() => {
 
@@ -159,19 +159,19 @@ export default {
 					})
 			});
 		},
-		sortRecipes: function(type) {
+		sortRecipes(type) {
 
 			this.recipes.sort(SortingHelper[type]);
 		},
-		parseDate: function(date) {
+		parseDate(date) {
 
 			return moment(date).format("DD MMM YYYY") + " at " + moment(date).format("HH:mm");
 		},
-		calculateABV: function(og, fg) {
+		calculateABV(og, fg) {
 
 			return ABVHelper.calculate(og, fg);
 		},
-		isOwner: function(user) {
+		isOwner(user) {
 
 			return user === this.$keycloak.userName;
 		}
