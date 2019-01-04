@@ -91,7 +91,7 @@
             }
         },
         created() {
-            console.log(this.value)
+
             this.search = this.value;
 
             if (this.list !== undefined) {
