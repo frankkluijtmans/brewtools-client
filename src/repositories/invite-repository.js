@@ -38,6 +38,23 @@ export default class InviteRepository {
         });
     }
 
+    static delete(id, data){
+
+        return new Promise((resolve, reject) => {
+
+            axios.post(
+                process.env.VUE_APP_API_BASE_URL + '/invite/delete/' + id,
+                data
+            ).then(() => {
+            
+                resolve();
+            }).catch(e => {
+
+                reject('Invite repository(delete): ' + e);
+            });
+        });
+    }
+
     static accept(id){
 
         return new Promise((resolve, reject) => {

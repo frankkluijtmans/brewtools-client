@@ -156,16 +156,29 @@ export default {
 
                         this.form.email = '';
                     }).catch((e) => {
-                        console.log(e);
-                        document.dispatchEvent(
-                            new CustomEvent('error_message', {
-                                detail: {
-                                    type: "OPERATION_FORBIDDEN_ERROR"
-                                }
-                            })
-                        )
+
+                        this.fireOperationForbiddenError();
                     })
             }
+        },
+        deleteUser(email) {
+            
+            InviteRepository.delete(this.recipe_id, {
+                    email
+                })
+                    .then(() => {
+                        
+                        for (let i = this.users.length - 1; i >= 0; --i) {
+
+							if (this.users[i].email == email) {
+								
+								this.users.splice(i,1);
+							}
+						}
+                    }).catch((e) => {
+
+                        this.fireOperationForbiddenError();
+                    })
         },
         getInitials(fullname) {
 
@@ -183,17 +196,19 @@ export default {
 
             if(!this.validEmail(this.form.email)) {
 
-                this.form.error = true;
-                this.form.message = 'Please fill out a valid e-mail address';
-                this.form.valid = false;
+                this.validationError('Please fill out a valid e-mail address');
                 return;
             }
 
-            if(!this.validUser(this.form.email)) {
+            if(this.isOwner(this.form.email)) {
 
-                this.form.error = true;
-                this.form.message = "You can't invite this user";
-                this.form.valid = false;
+                this.validationError('You can\'t invite yourself as a collaborator');
+                return;
+            }
+
+            if(this.isCollaborator(this.form.email)) {
+
+                this.validationError('This user was already invited');
                 return;
             }
 
@@ -207,14 +222,44 @@ export default {
             
             return regex.test(email);
         },
-        validUser(email) {
+        isOwner(email) {
 
             if(email === this.$keycloak.userName) {
                 
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
+        },
+        isCollaborator(email) {
+
+            let isCollaborator = false;
+
+            this.users.forEach(user => {
+
+                if(user.email === email) {
+
+                    isCollaborator = true;
+                }
+            })
+
+            return isCollaborator;
+        },
+        validationError(message) {
+            
+            this.form.error = true;
+            this.form.message = message;
+            this.form.valid = false;
+        },
+        fireOperationForbiddenError() {
+
+            document.dispatchEvent(
+                new CustomEvent('error_message', {
+                    detail: {
+                        type: "OPERATION_FORBIDDEN_ERROR"
+                    }
+                })
+            );
         }
     }
 }

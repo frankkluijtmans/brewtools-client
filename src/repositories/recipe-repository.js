@@ -79,7 +79,7 @@ export default class RecipeRepository {
 
         return new Promise((resolve, reject) => {
 
-            axios.post(
+            axios.get(
                 process.env.VUE_APP_API_BASE_URL + '/recipe/delete/' + id
             ).then(() => {
 
