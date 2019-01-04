@@ -90,19 +90,19 @@
 								class="TableRow"
 							>
 								<td><strong>Final volume</strong></td> 
-								<td>{{ recipe.base_volume.$numberDecimal }} liters</td>
+								<td>{{ recipe.base_volume }} liters</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
 								<td><strong>Mash water</strong></td>
-								<td>{{ recipe.mash_water.$numberDecimal }} liters</td>
+								<td>{{ recipe.mash_water }} liters</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
 								<td><strong>Flush water</strong></td>
-								<td>{{ recipe.flush_water.$numberDecimal }} liters</td>
+								<td>{{ recipe.flush_water }} liters</td>
 							</tr>
 						</tbody>
 					</table>
@@ -179,7 +179,7 @@
 								class="TableRow"
 							>
 								<td>{{ hop.name }}</td>
-								<td>{{ hop.bitterness.$numberDecimal }}%</td>
+								<td>{{ hop.bitterness }}%</td>
 								<td>{{ hop.volume }} grams</td>
 								<td>{{ hop.usage.amount }} {{ hop.usage.unit }}</td>
 							</tr>

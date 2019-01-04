@@ -27,7 +27,7 @@
                         >
                             <AutoComplete
                                 v-if="input.name === 'name' && collections[schema.name]"
-                                :v-model="item[input.name]"
+                                v-model="item[input.name]"
                                 @input="item[input.name] = $event"
                                 :list="collections[schema.name]"
                                 :placeholder="input.placeholder"

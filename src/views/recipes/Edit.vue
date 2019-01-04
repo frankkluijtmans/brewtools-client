@@ -196,7 +196,7 @@
 								>
 									<td>
 										<AutoComplete
-											:v-model="recipe.yeast.name"
+											v-model="recipe.yeast.name"
 											@input="recipe.yeast.name = $event"
 											:list="yeastCollection"
 											:placeholder="'Name'"
