@@ -28,18 +28,39 @@
                         <strong>{{ invite.name }}</strong>
                     </td>
                     <td class="Buttons">
-                        <a
-                            @click="acceptInvite(invite._id)"
-                            class="ActionButton Blue"
+                        <div 
+                            v-if="invite.action === null"
                         >
-                            <i class="fa fa-check" /> Accept
-                        </a>
-                        <a
-                            @click="declineInvite(invite._id)"
-                            class="ActionButton Red"
-                        >
-                            <i class="fa fa-close" /> Decline
-                        </a>
+                            <a
+                                @click="acceptInvite(invite)"
+                                class="ActionButton Blue"
+                            >
+                                <i class="fa fa-check" /> Accept
+                            </a>
+                            <a
+                                @click="declineInvite(invite)"
+                                class="ActionButton Red"
+                            >
+                                <i class="fa fa-close" /> Decline
+                            </a>
+                        </div>
+                        <span 
+                            v-else
+                            :class="invite.action"
+                            class="ActionLabel"
+                        > 
+                            <template 
+                                v-if="invite.action === 'Accepted'"
+                            >
+                                <i class="fa fa-check" /> 
+                            </template>
+                            <template 
+                                v-if="invite.action === 'Declined'"
+                            >
+                                <i class="fa fa-close" /> 
+                            </template>
+                            {{ invite.action }}
+                        </span>
                     </td>
                 </tr>
             </tbody>
@@ -66,7 +87,11 @@ export default {
 		InviteRepository.getAll()
 			.then(response => {
 				
-				this.invites = response;
+                this.invites = response.map(invite => {
+                    
+                    invite.action = null;
+                    return invite;
+                });
 			}).catch(() => {
 
 				document.dispatchEvent(
@@ -80,34 +105,49 @@ export default {
     },
     methods: {
 
-        acceptInvite(id) {
+        acceptInvite(invite) {
 
-            InviteRepository.accept(id)
+            InviteRepository.accept(invite._id)
                 .then(() => {
                     
-                    for (let i = this.invites.length - 1; i >= 0; --i) {
-
-                        if (this.invites[i]._id == id) {
-                            
-                            this.invites.splice(i,1);
-                        }
-					}
+                    invite.action = 'Accepted';
                 })
         },
-        declineInvite(id) {
+        declineInvite(invite) {
 
-            InviteRepository.decline(id)
+            InviteRepository.decline(invite._id)
                 .then(() => {
                     
-                    for (let i = this.invites.length - 1; i >= 0; --i) {
-
-                        if (this.invites[i]._id == id) {
-                            
-                            this.invites.splice(i,1);
-                        }
-					}
+                    invite.action = 'Declined';
                 })
         }
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    @import '../../styles/_variables';
+    @import '../../styles/_mixins';
+
+    .ActionLabel {
+        display: inline-block;
+        padding: 5px 8px;
+
+        border: none;
+        border-radius: 5px;
+        
+        background: $semidark-color;
+
+        color: $white;
+        text-decoration: none;
+        font-size: $SN;
+
+        &.Accepted {
+            background: $green;
+        }
+
+        &.Declined {
+            background: $red;
+        }
+    }
+</style>
