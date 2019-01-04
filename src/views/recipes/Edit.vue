@@ -20,6 +20,7 @@
 		</h1>
 		<form 
 			@submit.prevent="handleSubmit"
+			novalidate
 		>
 			<div class="Grid">
 
@@ -247,6 +248,7 @@
 		</form>
 		<InviteModal 
 			:users="this.recipe.collaborators"
+			:recipe_id="this.recipe._id"
 			ref="inviteModal" 
 		/>
 	</div>

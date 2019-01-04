@@ -21,11 +21,28 @@ export default class InviteRepository {
         })
     }
 
-    static accept(id){
+    static create(id, data){
 
         return new Promise((resolve, reject) => {
 
             axios.post(
+                process.env.VUE_APP_API_BASE_URL + '/invite/create/' + id,
+                data
+            ).then(() => {
+            
+                resolve();
+            }).catch(e => {
+
+                reject('Invite repository(create): ' + e);
+            });
+        });
+    }
+
+    static accept(id){
+
+        return new Promise((resolve, reject) => {
+
+            axios.get(
                 process.env.VUE_APP_API_BASE_URL + '/invite/accept/' + id
             ).then(() => {
             
@@ -41,7 +58,7 @@ export default class InviteRepository {
 
         return new Promise((resolve, reject) => {
 
-            axios.post(
+            axios.get(
                 process.env.VUE_APP_API_BASE_URL + '/invite/decline/' + id
             ).then(() => {
             

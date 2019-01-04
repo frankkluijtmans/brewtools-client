@@ -14,6 +14,7 @@
             </p>
             <form 
                 @submit.prevent="inviteUser"
+                novalidate
             >
                 <table
                     class="UserTable"
@@ -56,11 +57,19 @@
                         <tr class="InviteRow">
                             <td>
                                 <input
-                                    v-model="email"
+                                    v-model="form.email"
+                                    @change="validate"
+                                    :class="{ Error: form.error }"
                                     type="email" 
                                     placeholder="E-mail address" 
                                     class="InviteInput"
                                 />
+                                <span
+                                    v-if="form.message !== null && form.error"
+                                    class="ErrorMessage"
+                                >
+                                    {{ this.form.message }}
+                                </span>
                             </td>
                             <td class="Actions">
                                 <button
@@ -83,15 +92,23 @@
 </template>
 
 <script>
+import InviteRepository from '../../repositories/invite-repository';
+
 export default {
     name: 'InviteModal',
     props: {
-        users: Array
+        users: Array,
+        recipe_id: String
     },
     data() {
         return {
             show: false,
-            email: ''
+            form: {
+                email: null,
+                valid: false,
+                error: false,
+                message: null
+            }
         }
     },
     mounted() {
@@ -122,7 +139,33 @@ export default {
         },
         inviteUser() {
 
-            alert(this.email);
+            this.validate();
+
+            if(this.form.valid) {
+                
+                InviteRepository.create(this.recipe_id, {
+                    email: this.form.email
+                })
+                    .then(() => {
+                        
+                        this.users.push({
+                            email: this.form.email,
+                            fullname: null,
+                            status: 'pending'
+                        });
+
+                        this.form.email = '';
+                    }).catch((e) => {
+                        console.log(e);
+                        document.dispatchEvent(
+                            new CustomEvent('error_message', {
+                                detail: {
+                                    type: "OPERATION_FORBIDDEN_ERROR"
+                                }
+                            })
+                        )
+                    })
+            }
         },
         getInitials(fullname) {
 
@@ -135,6 +178,43 @@ export default {
             });
 
             return initials.toUpperCase();
+        },
+        validate() {
+
+            if(!this.validEmail(this.form.email)) {
+
+                this.form.error = true;
+                this.form.message = 'Please fill out a valid e-mail address';
+                this.form.valid = false;
+                return;
+            }
+
+            if(!this.validUser(this.form.email)) {
+
+                this.form.error = true;
+                this.form.message = "You can't invite this user";
+                this.form.valid = false;
+                return;
+            }
+
+            this.form.error = false;
+            this.form.message = null;
+            this.form.valid = true;
+        },
+        validEmail(email) {
+
+            const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            
+            return regex.test(email);
+        },
+        validUser(email) {
+
+            if(email === this.$keycloak.userName) {
+                
+                return false;
+            }
+
+            return true;
         }
     }
 }
@@ -206,6 +286,14 @@ export default {
                 &.Error {
                     border-color: $red;
                 }
+            }
+
+            .ErrorMessage {
+                display: block;
+                margin-top: 5px;
+
+                font-size: $S;
+                color: $red;
             }
         }
     }
