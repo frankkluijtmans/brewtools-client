@@ -89,7 +89,7 @@
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Actual volume</strong></td> 
+								<td><strong>Final volume</strong></td> 
 								<td>{{ recipe.base_volume.$numberDecimal }} liters</td>
 							</tr>
 							<tr 

@@ -114,7 +114,7 @@
 											min="0"
 											step="0.1"
 											v-model="recipe.base_volume" 
-											placeholder="Actual volume"
+											placeholder="Final volume"
 										>
 										<label class="InputLabel">liters</label>
 									</td>
