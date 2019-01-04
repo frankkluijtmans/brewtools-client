@@ -155,7 +155,7 @@ export default {
                         });
 
                         this.form.email = '';
-                    }).catch((e) => {
+                    }).catch(() => {
 
                         this.fireOperationForbiddenError();
                     })
@@ -175,7 +175,7 @@ export default {
 								this.users.splice(i,1);
 							}
 						}
-                    }).catch((e) => {
+                    }).catch(() => {
 
                         this.fireOperationForbiddenError();
                     })

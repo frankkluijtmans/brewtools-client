@@ -2,25 +2,51 @@
     <div
         class="PageError"
     >
-        <img
-            class="PageErrorIcon" 
-            src="../../assets/page_error.svg" 
-        />
-        <h2>
-            This page could not be loaded
-        </h2>
-        <button 
-            @click="reloadView()"
-            class="Button Blue"
+        <template 
+            v-if="type === 'not_found'"
         >
-            Try again
-        </button>
+            <img
+                class="PageErrorIcon" 
+                src="../../assets/page_404.svg" 
+            />
+            <h2>
+                This page could not be found
+            </h2>
+            <router-link
+                to="/"
+                tag="button"
+                class="Button Blue"
+            >
+                Back to dashboard
+            </router-link>
+        </template>
+        <template v-else>
+            <img
+                class="PageErrorIcon" 
+                src="../../assets/page_error.svg" 
+            />
+            <h2>
+                This page could not be loaded
+            </h2>
+            <button 
+                @click="reloadView()"
+                class="Button Blue"
+            >
+                Try again
+            </button>
+        </template>
     </div>
 </template>
 
 <script>
 export default {
     name: 'PageError',
+    props: {
+        type: {
+            type: String,
+            default: ''
+        }
+    },
     methods: {
         reloadView() {
 
