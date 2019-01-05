@@ -17,17 +17,32 @@ export default {
 
 <style scoped lang="scss">
 	@import '../styles/_variables';
+	@import '../styles/_mixins';
 
 	#main-navigation {
-		position: relative;
-        z-index: $FirstFloor;
+		position: fixed;
+		top: 60px;
+		z-index: $SecondFloor;
+		
+		width: 100%;
 
 		flex: 0 0 250px;
 		margin: 0;
 		min-height: calc(100vh - 60px);
 		height: auto;
+		transform: translateX(0);
+		transition: transforn 0.3s;
 
 		background: $dark-color;
+
+		@include Breakpoint(Large, ExtraLarge) {
+			position: relative;
+			top: auto;
+
+			width: auto;
+
+			transform: translateX(0);
+		}
 
 		.NavigationHeading {
 			padding: 0 25px;

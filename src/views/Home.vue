@@ -119,9 +119,17 @@ export default {
 		background-size: cover;
 
 		.Content {
-			width: 50%;
+			width: 100%;
 
 			color: $white;
+
+			@include Breakpoint(Large) {
+				width: 80%;
+			}
+
+			@include Breakpoint(ExtraLarge) {
+				width: 50%;
+			}
 
 			.Button {
 				box-shadow: none;
@@ -130,64 +138,15 @@ export default {
 			h1 {
 				margin: 0;
 
-				font-size: $XXL;
+				font-size: $XL;
+
+				@include Breakpoint(ExtraLarge) {
+					font-size: $XXL;
+				}
 			}
 
 			p {
 				margin: 25px 0;
-			}
-		}
-	}
-
-	.DashboardStats {
-
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-
-		li {
-			position: relative;
-			overflow: hidden;
-
-			padding: 15px 15px 45px;
-			margin-bottom: 25px;
-
-			background: $white;
-			border-radius: 5px;
-			@include shadow();
-
-			span {
-				font-size: $XXL;
-				font-weight: 500;
-			}
-
-			footer {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-
-				width: 100%;
-				padding: 8px 15px;
-				margin-top: 10px;
-
-				@include gradient(#773f19, #a26a44);
-
-				color: $white;
-				font-size: $SN;
-			}
-
-			&:first-child {
-
-				footer {
-					@include gradient(#7a7453, #9c956d);
-				}
-			}
-
-			&:last-child {
-
-				footer {
-					@include gradient(#afc40c, #c6db20);
-				}
 			}
 		}
 	}

@@ -29,16 +29,23 @@ export default {
 	@import '../styles/_mixins';
 
 	#top-bar {
-		position: relative;
-        z-index: $FirstFloor;
+		position: fixed;
+		top: 0;
+        z-index: $SecondFloor;
 
 		display: flex;
 		flex-direction: row;
 		height: 60px;
+		width: 100%;
 		padding: 0 15px;
 
 		@include shadow();
 		@include gradient($primary-color, $secondary-color);
+
+		@include Breakpoint(Large, ExtraLarge) {
+			position: relative;
+			top: auto;
+		}
 
 		#logo {
 			line-height: 60px;
@@ -50,13 +57,17 @@ export default {
 		}
 
 		#user {
-			display: flex;
+			display: none;
 			flex-direction: row;
 			line-height: 60px;
 			margin-left: auto;	
 			margin-right: 15px;
 
 			font-size: $N;
+
+			@include Breakpoint(Large, ExtraLarge) {
+				display: flex;
+			}
 
 			.UserImage {
 				height: 36px;
