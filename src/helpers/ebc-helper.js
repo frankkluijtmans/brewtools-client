@@ -16,7 +16,7 @@ export default class EBCHelper {
         fermentables.forEach(fermentable => {
 
             if(fermentable.volume !== null && fermentable.color !== null) {
-                
+
                 let percentile = Math.round(parseInt(fermentable.volume) / (totalVolume / 100));
                 totalEbc += percentile * parseInt(fermentable.color);
             }

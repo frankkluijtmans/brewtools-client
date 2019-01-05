@@ -94,6 +94,13 @@ const FieldSchema = {
                 placeholder: '',
                 type: 'number',
                 unit_label: 'grams'
+            },
+            {
+                name: 'usage',
+                header: 'Usage',
+                placeholder: '',
+                type: 'number',
+                unit_label: ['minutes/boil', 'days/dryhop']
             }
         ]
     }

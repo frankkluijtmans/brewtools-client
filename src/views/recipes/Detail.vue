@@ -215,6 +215,7 @@
 							<tr class="TableRow TableHeader">
 								<td>Name</td>
 								<td>Volume</td>
+								<td>Usage</td>
 							</tr>
 							<tr 
 								v-for="ingredient in recipe.other"
@@ -223,6 +224,7 @@
 							>
 								<td>{{ ingredient.name }}</td>
 								<td>{{ ingredient.volume }} grams</td>
+								<td>{{ ingredient.usage.amount }} {{ ingredient.usage.unit }}</td>
 							</tr>
 						</tbody>
 					</table>

@@ -284,7 +284,11 @@ export default {
 				}],
 				other: [{
 					name: '',
-					volume: null
+					volume: null,
+					usage: {
+						amount: null,
+						unit: 'minutes/boil'
+					}
 				}],
 				yeast: {
 					name: '',
