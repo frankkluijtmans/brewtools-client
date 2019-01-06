@@ -346,7 +346,17 @@ export default {
 
 			RecipeRepository.update(this.recipe, this.recipe._id)
 				.then(() => {
+
 					alert('recipe saved');
+				}).catch(() => {
+
+					document.dispatchEvent(
+						new CustomEvent('error_message', {
+							detail: {
+								type: "DATA_INSERTION_ERROR"
+							}
+						})
+					)
 				})
 		},
 		openInviteModal() {

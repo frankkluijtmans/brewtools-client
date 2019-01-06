@@ -338,7 +338,17 @@ export default {
 
 			RecipeRepository.create(this.recipe)
 				.then(() => {
+
 					alert('recipe saved');
+				}).catch(() => {
+
+					document.dispatchEvent(
+						new CustomEvent('error_message', {
+							detail: {
+								type: "DATA_INSERTION_ERROR"
+							}
+						})
+					)
 				})
 		}
 	}
