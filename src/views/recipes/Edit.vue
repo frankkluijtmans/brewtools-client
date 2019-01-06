@@ -21,6 +21,9 @@
 				</button>
 			</div>
 		</h1>
+		<p class="LastEdited">
+			Last edited: <strong>{{ parseDate(recipe.last_edited.date) }}</strong> by <strong>{{ recipe.last_edited.user }}</strong>
+		</p>
 		<form 
 			@submit.prevent="handleSubmit"
 			novalidate
@@ -266,6 +269,7 @@ import EBCHelper from '../../helpers/ebc-helper';
 import IBUHelper from '../../helpers/ibu-helper';
 import InviteModal from '../../components/UI/InviteModal';
 import EBCBadge from '../../components/UI/EBCBadge';
+import moment from 'moment';
 
 export default {
 	name: 'NewRecipe',
@@ -352,7 +356,19 @@ export default {
 		isOwner(user) {
 
 			return user === this.$keycloak.userName;
+		},
+		parseDate(date) {
+
+			return moment(date).format("DD MMM YYYY") + " at " + moment(date).format("HH:mm");
 		}
 	}
 }
 </script>
+
+<style lang="scss" scoped>
+	.LastEdited {
+		margin: -10px 0 25px;
+
+		font-style: italic;
+	}
+</style>
