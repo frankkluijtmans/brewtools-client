@@ -38,47 +38,51 @@
 								<tr
 									class="TableRow"
 								>
-									<td><strong>Name</strong></td>
 									<td>
-										<input type="text" v-model="recipe.name" placeholder="Name">
+										<label class="TopLabel">Name</label>
+										<input type="text" v-model="recipe.name">
 									</td>
 								</tr>
 								<tr
 									class="TableRow"
 								>
-									<td><strong>Style</strong></td>
 									<td>
-										<select
-											v-model="recipe.style"
-										>
-											<option 
-												v-for="style in styleCollection"
-												:key="style.name"
+										<label class="TopLabel">Style</label>
+										<div class="InputWrapper">
+											<select
+												v-model="recipe.style"
 											>
-												{{ style.name }}
-											</option>
-										</select>
-										<i class="fa fa-caret-down SelectBoxIcon" />
+												<option 
+													v-for="style in styleCollection"
+													:key="style.name"
+												>
+													{{ style.name }}
+												</option>
+											</select>
+											<i class="fa fa-caret-down SelectBoxIcon" />
+										</div>
 									</td>
 								</tr>
 								<tr
 									class="TableRow"
 								>
-									<td><strong>Boiling time</strong></td>
 									<td>
-										<input 
-											type="number"
-											min="0"
-											v-model="recipe.boiling_time"
-										>
-										<label class="InputLabel">minutes</label>
+										<label class="TopLabel">Boiling time</label>
+										<div class="InputWrapper">
+											<input 
+												type="number"
+												min="0"
+												v-model="recipe.boiling_time"
+											>
+											<label class="InputLabel">minutes</label>
+										</div>
 									</td>
 								</tr>
 								<tr
 									class="TableRow"
 								>
-									<td><strong>Original gravity(og)</strong></td>
 									<td>
+										<label class="TopLabel">Original gravity(og)</label>
 										<input 
 											type="number"
 											min="1000"
@@ -89,8 +93,8 @@
 								<tr
 									class="TableRow"
 								>
-									<td><strong>Final gravity(fg)</strong></td>
 									<td>
+										<label class="TopLabel">Final gravity(fg)</label>
 										<input 
 											type="number"
 											min="1000"
@@ -126,43 +130,49 @@
 								<tr
 									class="TableRow"
 								>
-									<td><strong>Final volume</strong></td>
 									<td>
-										<input 
-											type="number"
-											min="0"
-											step="0.1"
-											v-model="recipe.base_volume"
-										>
-										<label class="InputLabel">liters</label>
+										<label class="TopLabel">Final volume</label>
+										<div class="InputWrapper">
+											<input 
+												type="number"
+												min="0"
+												step="0.1"
+												v-model="recipe.base_volume"
+											>
+											<label class="InputLabel">liters</label>
+										</div>
 									</td>
 								</tr>
 								<tr
 									class="TableRow"
 								>
-									<td><strong>Mash water</strong></td>
 									<td>
-										<input 
-											type="number"
-											min="0"
-											step="0.1"
-											v-model="recipe.mash_water"
-										>
-										<label class="InputLabel">liters</label>
+										<label class="TopLabel">Mash water</label>
+										<div class="InputWrapper">
+											<input 
+												type="number"
+												min="0"
+												step="0.1"
+												v-model="recipe.mash_water"
+											>
+											<label class="InputLabel">liters</label>
+										</div>
 									</td>
 								</tr>
 								<tr
 									class="TableRow"
 								>
-									<td><strong>Flush water</strong></td>
 									<td>
-										<input
-											type="number"
-											min="0"
-											step="0.1"
-											v-model="recipe.flush_water"
-										>
-										<label class="InputLabel">liters</label>
+										<label class="TopLabel">Flush water</label>
+										<div class="InputWrapper">
+											<input
+												type="number"
+												min="0"
+												step="0.1"
+												v-model="recipe.flush_water"
+											>
+											<label class="InputLabel">liters</label>
+										</div>
 									</td>
 								</tr>
 							</tbody>

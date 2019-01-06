@@ -138,6 +138,15 @@
                 }
             }
 
+            .InputWrapper {
+                position: relative;
+            }
+
+            .TopLabel {
+                font-size: $S;
+                color: $semidark-color;
+            }
+
             .InputLabel,
             .SelectBoxIcon {
                 position: absolute;

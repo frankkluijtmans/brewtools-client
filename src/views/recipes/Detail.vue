@@ -34,32 +34,52 @@
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Name</strong></td>
-								<td>{{ recipe.name }}</td>
+								<td>
+									<label class="TopLabel">Name</label>
+									<div class="InputWrapper">
+										{{ recipe.name }}
+									</div>
+								</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Style</strong></td>
-								<td>{{ recipe.style }}</td>
+								<td>
+									<label class="TopLabel">Style</label>
+									<div class="InputWrapper">
+										{{ recipe.style }}
+									</div>
+								</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Boiling time</strong></td>
-								<td>{{ recipe.boiling_time }} minutes</td>
+								<td>
+									<label class="TopLabel">Boiling time</label>
+									<div class="InputWrapper">
+										{{ recipe.boiling_time }} minutes
+									</div>
+								</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Original gravity(og)</strong></td>
-								<td>{{ recipe.og }}</td>
+								<td>
+									<label class="TopLabel">Original gravity(og)</label>
+									<div class="InputWrapper">
+										{{ recipe.og }}
+									</div>
+								</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Final gravity(fg)</strong></td>
-								<td>{{ recipe.fg }}</td>
+								<td>
+									<label class="TopLabel">Final gravity(fg)</label>
+									<div class="InputWrapper">
+										{{ recipe.fg }}
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -89,20 +109,32 @@
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Final volume</strong></td> 
-								<td>{{ recipe.base_volume }} liters</td>
+								<td>
+									<label class="TopLabel">Final volume</label>
+									<div class="InputWrapper">
+										{{ recipe.base_volume }} liters
+									</div>
+								</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Mash water</strong></td>
-								<td>{{ recipe.mash_water }} liters</td>
+								<td>
+									<label class="TopLabel">Mash water</label>
+									<div class="InputWrapper">
+										{{ recipe.mash_water }} liters
+									</div>
+								</td>
 							</tr>
 							<tr 
 								class="TableRow"
 							>
-								<td><strong>Flush water</strong></td>
-								<td>{{ recipe.flush_water }} liters</td>
+								<td>
+									<label class="TopLabel">Flush water</label>
+									<div class="InputWrapper">
+										{{ recipe.flush_water }} liters
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
