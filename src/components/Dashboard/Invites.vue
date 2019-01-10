@@ -7,64 +7,69 @@
         <EmptyTable v-if="invites.length === 0">
             If another user invites you to collaborate on their recipes invites will show up here.
         </EmptyTable>
-        <table v-else>
-            <tbody>
-                <tr class="TableRow TableHeader">
-                    <td>
-                        Invite
-                    </td>
-                    <td>
-                        Actions
-                    </td>
-                </tr>
-                <tr
-                    v-for="(invite, index) in invites"
-                    :key="index"
-                    class="TableRow"
-                >
-                    <td>
-                        <strong>{{ invite.owner.fullname }}</strong>
-                        invited you to collaborate on his/her recipe
-                        <strong>{{ invite.name }}</strong>
-                    </td>
-                    <td class="Buttons">
-                        <div 
-                            v-if="invite.action === null"
-                        >
-                            <a
-                                @click="acceptInvite(invite)"
-                                class="ActionButton Blue"
+        <div
+            v-else
+            class="ResponsiveTable"
+        >
+            <table>
+                <tbody>
+                    <tr class="TableRow TableHeader">
+                        <td>
+                            Invite
+                        </td>
+                        <td>
+                            Actions
+                        </td>
+                    </tr>
+                    <tr
+                        v-for="(invite, index) in invites"
+                        :key="index"
+                        class="TableRow"
+                    >
+                        <td>
+                            <strong>{{ invite.owner.fullname }}</strong>
+                            invited you to collaborate on his/her recipe
+                            <strong>{{ invite.name }}</strong>
+                        </td>
+                        <td class="Buttons">
+                            <div 
+                                v-if="invite.action === null"
                             >
-                                <i class="fa fa-check" /> Accept
-                            </a>
-                            <a
-                                @click="declineInvite(invite)"
-                                class="ActionButton Red"
-                            >
-                                <i class="fa fa-close" /> Decline
-                            </a>
-                        </div>
-                        <span 
-                            v-else
-                            :class="invite.action"
-                            class="ActionLabel"
-                        > 
-                            <template 
-                                v-if="invite.action === 'Accepted'"
-                            >
-                                <i class="fa fa-check" /> 
-                            </template>
-                            <template 
-                                v-if="invite.action === 'Declined'"
-                            >
-                                <i class="fa fa-close" /> 
-                            </template>
-                            {{ invite.action }}
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                <a
+                                    @click="acceptInvite(invite)"
+                                    class="ActionButton Blue"
+                                >
+                                    <i class="fa fa-check" /> Accept
+                                </a>
+                                <a
+                                    @click="declineInvite(invite)"
+                                    class="ActionButton Red"
+                                >
+                                    <i class="fa fa-close" /> Decline
+                                </a>
+                            </div>
+                            <span 
+                                v-else
+                                :class="invite.action"
+                                class="ActionLabel"
+                            > 
+                                <template 
+                                    v-if="invite.action === 'Accepted'"
+                                >
+                                    <i class="fa fa-check" /> 
+                                </template>
+                                <template 
+                                    v-if="invite.action === 'Declined'"
+                                >
+                                    <i class="fa fa-close" /> 
+                                </template>
+                                {{ invite.action }}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 

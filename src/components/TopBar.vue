@@ -3,6 +3,12 @@
 		<router-link to="/" id="logo">
 			<img src="../assets/logo.svg" alt="Brewtools">
 		</router-link>
+		<a
+			@click="toggleMenu()"
+			id="menu-toggle"
+		>
+			<i class="fa fa-bars"></i>
+		</a>
 		<div id="user">
 			<div class="UserImage">
 			</div>
@@ -16,21 +22,29 @@ export default {
 	name: 'TopBar',
 	computed: {
 
-		username: function () {
+		username() {
 
 			return this.$keycloak.fullName
+		}
+	},
+	methods: {
+
+		toggleMenu() {
+
+			document.dispatchEvent(new Event('toggleMenu'));
 		}
 	}
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 	@import '../styles/_variables';
 	@import '../styles/_mixins';
 
 	#top-bar {
 		position: fixed;
 		top: 0;
+		left: 0;
         z-index: $SecondFloor;
 
 		display: flex;
@@ -44,7 +58,6 @@ export default {
 
 		@include Breakpoint(Large, ExtraLarge) {
 			position: relative;
-			top: auto;
 		}
 
 		#logo {
@@ -79,6 +92,20 @@ export default {
 
 				background: url(../assets/user.png) no-repeat center center;
 				background-size: cover;
+			}
+		}
+
+		#menu-toggle {
+			margin: 0 10px 0 auto;
+			
+			line-height: 62px;
+			font-size: $XL;
+			color: $dark-color;
+
+			cursor: pointer;
+
+			@include Breakpoint(Large, ExtraLarge) {
+				display: none;
 			}
 		}
 	}

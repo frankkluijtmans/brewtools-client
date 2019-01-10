@@ -198,48 +198,52 @@
 
 					<div class="TableContainer Yeast">
 						<header>Yeast</header>
-						<table>
-							<tbody>
-								<tr class="TableRow TableHeader">
-									<td>Name</td>
-									<td>Volume</td>
-								</tr>
-								<tr
-									class="TableRow"
-								>
-									<td>
-										<AutoComplete
-											v-model="recipe.yeast.name"
-											@input="recipe.yeast.name = $event"
-											:list="yeastCollection"
-											:placeholder="'Name'"
-										/>
-									</td>
-									<td>
-										<input 
-											min="0" 
-											type="number" 
-											v-model="recipe.yeast.volume.amount"
-										/>
-										<select
-											v-model="recipe.yeast.volume.unit"	
-											class="InputLabel"
-										>
-											<option 
-												selected
-												value="grams"
+						<div
+							class="ResponsiveTable"
+						>
+							<table>
+								<tbody>
+									<tr class="TableRow TableHeader">
+										<td>Name</td>
+										<td>Volume</td>
+									</tr>
+									<tr
+										class="TableRow"
+									>
+										<td>
+											<AutoComplete
+												v-model="recipe.yeast.name"
+												@input="recipe.yeast.name = $event"
+												:list="yeastCollection"
+												:placeholder="'Name'"
+											/>
+										</td>
+										<td>
+											<input 
+												min="0" 
+												type="number" 
+												v-model="recipe.yeast.volume.amount"
+											/>
+											<select
+												v-model="recipe.yeast.volume.unit"	
+												class="InputLabel"
 											>
-												grams
-											</option>
-											<option>
-												millilitres
-											</option>
-										</select>
-										<i class="fa fa-caret-down SelectBoxIcon" />
-									</td>
-								</tr>
-							</tbody>
-						</table>
+												<option 
+													selected
+													value="grams"
+												>
+													grams
+												</option>
+												<option>
+													millilitres
+												</option>
+											</select>
+											<i class="fa fa-caret-down SelectBoxIcon" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 
 					<RepeaterField 

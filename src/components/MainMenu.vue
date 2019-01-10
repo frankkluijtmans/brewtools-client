@@ -1,5 +1,8 @@
 <template>
-	<nav id="main-navigation">
+	<nav 
+		:class="{ Visible: isVisible }"
+		id="main-navigation"
+	>
 		<header class="NavigationHeading">Main menu</header>
 		<router-link to="/" :class="this.$route.path === '/' ? 'Active' : ''">Dashboard</router-link>
 		<router-link to="/recipes" :class="this.$route.path.startsWith('/recipes') ? 'Active' : ''">Recipes</router-link>
@@ -11,7 +14,26 @@
 
 <script>
 export default {
-	name: 'MainMenu'
+	name: 'MainMenu',
+	data() {
+		return {
+			isVisible: false
+		}
+	},
+	mounted() {
+
+		document.addEventListener('toggleMenu', () => {
+
+			this.isVisible = this.isVisible ? false : true;
+		})
+	},
+	watch: {
+
+		$route() {
+
+			this.isVisible = false;
+		}
+	}
 }
 </script>
 
@@ -30,10 +52,14 @@ export default {
 		margin: 0;
 		min-height: calc(100vh - 60px);
 		height: auto;
-		transform: translateX(0);
-		transition: transforn 0.3s;
+		transform: translateX(-100%);
+		transition: all 0.3s;
 
 		background: $dark-color;
+
+		&.Visible {
+			transform: translateX(0);
+		}
 
 		@include Breakpoint(Large, ExtraLarge) {
 			position: relative;

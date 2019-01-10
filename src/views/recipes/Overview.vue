@@ -10,66 +10,71 @@
 			<EmptyTable v-if="recipes.length === 0">
 				Start creating some recipes to fill up this overview.
 			</EmptyTable>
-			<table v-else>
-				<tbody>
-					<tr class="TableRow TableHeader">
-						<td @click="sortRecipes('name')" class="Sortable">
-							Recipe <i class="fa fa-sort"></i>
-						</td>
-						<td @click="sortRecipes('style')" class="Sortable">
-							Style <i class="fa fa-sort"></i>
-						</td>
-						<td @click="sortRecipes('abv')" class="Sortable">
-							ABV <i class="fa fa-sort"></i>
-						</td>
-						<td @click="sortRecipes('lastEdited')" class="Sortable">
-							Last edited <i class="fa fa-sort"></i>
-						</td>
-						<td>
-							Actions
-						</td>
-					</tr>
-					<tr
-						v-for="recipe in recipes"
-						:key="recipe._id"
-						class="TableRow"
-					>
-						<td class="RecipeTitle">
-							<EBCBadge :ebc="recipe.ebc" />
-							{{ recipe.name }}
-							<i
-								v-if="!isOwner(recipe.owner.email)"
-							>
-								(Shared)
-							</i>
-						</td>
-						<td>{{ recipe.style }}</td>
-						<td>{{ calculateABV(recipe.og, recipe.fg ) }}%</td>
-						<td>{{ parseDate(recipe.last_edited.date) }}</td>
-						<td class="Buttons">
-							<router-link
-								:to='"/recipes/detail/" + recipe._id'
-								class="ActionButton Blue"
-							>
-								<i class="fa fa-eye" /> View
-							</router-link>
-							<router-link 
-								:to='"/recipes/edit/" + recipe._id'
-								class="ActionButton Blue"
-							>
-								<i class="fa fa-edit" /> Edit
-							</router-link>
-							<a
-								@click="deleteRecipe(recipe._id)"
-								v-if="isOwner(recipe.owner.email)"
-								class="ActionButton Red"
-							>
-								<i class="fa fa-trash" /> Delete
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<div
+				v-else
+				class="ResponsiveTable ExtraWide"
+			>
+				<table>
+					<tbody>
+						<tr class="TableRow TableHeader">
+							<td @click="sortRecipes('name')" class="Sortable">
+								Recipe <i class="fa fa-sort"></i>
+							</td>
+							<td @click="sortRecipes('style')" class="Sortable">
+								Style <i class="fa fa-sort"></i>
+							</td>
+							<td @click="sortRecipes('abv')" class="Sortable">
+								ABV <i class="fa fa-sort"></i>
+							</td>
+							<td @click="sortRecipes('lastEdited')" class="Sortable">
+								Last edited <i class="fa fa-sort"></i>
+							</td>
+							<td>
+								Actions
+							</td>
+						</tr>
+						<tr
+							v-for="recipe in recipes"
+							:key="recipe._id"
+							class="TableRow"
+						>
+							<td class="RecipeTitle">
+								<EBCBadge :ebc="recipe.ebc" />
+								{{ recipe.name }}
+								<i
+									v-if="!isOwner(recipe.owner.email)"
+								>
+									(Shared)
+								</i>
+							</td>
+							<td>{{ recipe.style }}</td>
+							<td>{{ calculateABV(recipe.og, recipe.fg ) }}%</td>
+							<td>{{ parseDate(recipe.last_edited.date) }}</td>
+							<td class="Buttons">
+								<router-link
+									:to='"/recipes/detail/" + recipe._id'
+									class="ActionButton Blue"
+								>
+									<i class="fa fa-eye" /> View
+								</router-link>
+								<router-link 
+									:to='"/recipes/edit/" + recipe._id'
+									class="ActionButton Blue"
+								>
+									<i class="fa fa-edit" /> Edit
+								</router-link>
+								<a
+									@click="deleteRecipe(recipe._id)"
+									v-if="isOwner(recipe.owner.email)"
+									class="ActionButton Red"
+								>
+									<i class="fa fa-trash" /> Delete
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<footer>
 				<router-link to="/recipes/new" class="ActionButton Large New">
 					<i class="fa fa-plus" /> Create a new recipe

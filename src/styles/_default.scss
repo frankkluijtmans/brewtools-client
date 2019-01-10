@@ -29,9 +29,15 @@ h1 {
         margin: 20px 0;
 
         .Actions {
-            position: absolute;
-            right: 0;
-            top: -8px;
+            margin: 15px 0 25px 0;
+
+            @include Breakpoint(Large, ExtraLarge) {
+                position: absolute;
+                right: 0;
+                top: -8px;
+
+                margin: 0;
+            }
 
             .Button {
                 margin-right: 10px;
@@ -48,7 +54,12 @@ h1 {
     position: relative;
     
     width: 100%;
+    margin-top: 60px;
     padding: 25px;
+
+    @include Breakpoint(Large, ExtraLarge) {
+        margin-top: 0;
+    }
 }
 
 .Grid {
