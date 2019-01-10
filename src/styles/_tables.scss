@@ -69,6 +69,7 @@
 
     .ResponsiveTable {
         overflow-x: scroll;
+        overflow-y: visible;
 
         @include Breakpoint(Large, ExtraLarge) {
             overflow-x: auto;
