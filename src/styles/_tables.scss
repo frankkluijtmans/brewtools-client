@@ -72,7 +72,7 @@
         overflow-y: visible;
 
         @include Breakpoint(Large, ExtraLarge) {
-            overflow-x: auto;
+            overflow: visible;
         }
 
         table {

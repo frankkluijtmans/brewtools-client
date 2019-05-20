@@ -112,7 +112,19 @@
 								<td>
 									<label class="TopLabel">Final volume</label>
 									<div class="InputWrapper">
-										{{ recipe.base_volume }} liters
+										{{ volume }} liters
+										<button
+											@mousedown="increaseRecipeVolume"
+											class="InlineButton"
+										>
+											<i class="fa fa-plus" />
+										</button>
+										<button 
+											@mousedown="decreaseRecipeVolume"
+											class="InlineButton"
+										>
+											<i class="fa fa-minus" />
+										</button>
 									</div>
 								</td>
 							</tr>
@@ -122,7 +134,7 @@
 								<td>
 									<label class="TopLabel">Mash water</label>
 									<div class="InputWrapper">
-										{{ recipe.mash_water }} liters
+										{{ Math.round( fraction * mashWater ) }} liters
 									</div>
 								</td>
 							</tr>
@@ -132,7 +144,7 @@
 								<td>
 									<label class="TopLabel">Flush water</label>
 									<div class="InputWrapper">
-										{{ recipe.flush_water }} liters
+										{{ Math.round( fraction * flushWater ) }} liters
 									</div>
 								</td>
 							</tr>
@@ -167,7 +179,7 @@
 								>
 									<td>{{ fermentable.name }}</td>
 									<td>{{ fermentable.color }} EBC</td>
-									<td>{{ fermentable.volume }} grams</td>
+									<td>{{ scaleIngredient(fermentable.volume) }}  grams</td>
 								</tr>
 							</tbody>
 						</table>
@@ -221,7 +233,7 @@
 								>
 									<td>{{ hop.name }}</td>
 									<td>{{ hop.bitterness }}%</td>
-									<td>{{ hop.volume }} grams</td>
+									<td>{{ scaleIngredient(hop.volume) }} grams</td>
 									<td>{{ hop.usage.amount }} {{ hop.usage.unit }}</td>
 								</tr>
 							</tbody>
@@ -241,7 +253,7 @@
 								class="TableRow"
 							>
 								<td>{{ recipe.yeast.name }}</td>
-								<td>{{ recipe.yeast.volume.amount }} {{ recipe.yeast.volume.unit }}</td>
+								<td>{{ scaleIngredient(recipe.yeast.volume.amount) }} {{ recipe.yeast.volume.unit }}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -269,7 +281,7 @@
 									class="TableRow"
 								>
 									<td>{{ ingredient.name }}</td>
-									<td>{{ ingredient.volume }} grams</td>
+									<td>{{ scaleIngredient(ingredient.volume) }} grams</td>
 									<td>{{ ingredient.usage.amount }} {{ ingredient.usage.unit }}</td>
 								</tr>
 							</tbody>
@@ -302,6 +314,7 @@ export default {
 	data() {
 		return {
 			recipe: {},
+			volume: 0,
 			loaded: false,
 			error: false
 		}
@@ -316,6 +329,24 @@ export default {
 			}
 
 			return 0;
+		},
+		mashWater() {
+
+			return Math.round((this.volume / this.recipe.base_volume) * this.recipe.mash_water);
+		},
+		flushWater() {
+
+			return Math.round((this.volume / this.recipe.base_volume) * this.recipe.flush_water);
+		},
+		fraction() {
+
+			const evaporationPerHour = 3;
+			const absLoss = this.recipe.boiling_time * evaporationPerHour;
+			const netLossPercentage = absLoss / this.recipe.base_volume;
+			const waterWithoutEvaporatedPart = (100 - netLossPercentage) * (this.recipe.mash_water + this.recipe.flush_water);
+			const waterWithEvaporatedPart = waterWithoutEvaporatedPart + absLoss;
+			
+			return (waterWithEvaporatedPart / (this.recipe.mash_water + this.recipe.flush_water)) / 100;
 		}
 	},
 	mounted() {
@@ -324,6 +355,7 @@ export default {
 			.then(data => {
 
 				this.recipe = data;
+				this.volume = data.base_volume;
 				this.loaded = true;
 			}).catch(() => {
 
@@ -343,6 +375,18 @@ export default {
 		printRecipe() {
 
 			window.print();
+		},
+		increaseRecipeVolume() {
+
+			this.volume++;
+		},
+		decreaseRecipeVolume() {
+
+			this.volume--;
+		},
+		scaleIngredient(value) {
+
+			return Math.round((value / this.recipe.base_volume * this.volume) * this.fraction);
 		}
 	}
 }
