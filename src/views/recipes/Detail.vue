@@ -5,7 +5,7 @@
 	</div>
 	<div v-else>
 		<h1 class="PageTitle">
-			{{ recipe.name }}
+			{{ recipe.name }} {{ fraction }}
 			<div class="Actions">
 				<button 
 					@click="printRecipe()"
@@ -341,12 +341,12 @@ export default {
 		fraction() {
 
 			const evaporationPerHour = 3;
-			const absLoss = this.recipe.boiling_time * evaporationPerHour;
-			const netLossPercentage = absLoss / this.recipe.base_volume;
-			const waterWithoutEvaporatedPart = (100 - netLossPercentage) * (this.recipe.mash_water + this.recipe.flush_water);
+			const absLoss = (this.recipe.boiling_time / 60) * evaporationPerHour;
+			const netLossPercentage = absLoss / (this.mashWater + this.flushWater) * 100;
+			const waterWithoutEvaporatedPart = (100 - netLossPercentage) * (this.mashWater + this.flushWater);
 			const waterWithEvaporatedPart = waterWithoutEvaporatedPart + absLoss;
 			
-			return (waterWithEvaporatedPart / (this.recipe.mash_water + this.recipe.flush_water)) / 100;
+			return (waterWithEvaporatedPart / (this.mashWater + this.flushWater)) / 100;
 		}
 	},
 	mounted() {
