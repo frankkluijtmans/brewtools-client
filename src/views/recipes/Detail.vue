@@ -5,7 +5,7 @@
 	</div>
 	<div v-else>
 		<h1 class="PageTitle">
-			{{ recipe.name }} {{ fraction }}
+			{{ recipe.name }}
 			<div class="Actions">
 				<button 
 					@click="printRecipe()"
