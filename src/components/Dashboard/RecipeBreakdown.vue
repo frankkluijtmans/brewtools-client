@@ -93,10 +93,10 @@ export default {
 
         getRecipeTypes() {
 
-            return this.recipes.map(recipe => {
+            return [... new Set(this.recipes.map(recipe => {
 
                 return recipe.style;
-            })
+            }))];
         },
         getRecipeCounts() {
 

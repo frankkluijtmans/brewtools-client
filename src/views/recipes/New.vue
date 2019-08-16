@@ -234,6 +234,9 @@
 
 			</div>
 		</form>
+		<SuccessModal ref="successModal">
+			Your changes we're saved successfully.
+		</SuccessModal>
 	</div>
 </template>
 
@@ -248,13 +251,15 @@ import ABVHelper from '../../helpers/abv-helper';
 import EBCHelper from '../../helpers/ebc-helper';
 import IBUHelper from '../../helpers/ibu-helper';
 import EBCBadge from '../../components/UI/EBCBadge';
+import SuccessModal from '../../components/UI/SuccessModal';
 
 export default {
 	name: 'NewRecipe',
 	components: {
 		EBCBadge,
 		RepeaterField,
-		AutoComplete
+		AutoComplete,
+		SuccessModal
 	},
 	data() {
 		return {
@@ -344,7 +349,7 @@ export default {
 			RecipeRepository.create(this.recipe)
 				.then(() => {
 
-					alert('recipe saved');
+					this.$refs.successModal.showModal();
 				}).catch(() => {
 
 					document.dispatchEvent(

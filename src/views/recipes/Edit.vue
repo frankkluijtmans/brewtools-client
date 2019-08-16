@@ -266,6 +266,9 @@
 			:recipe_id="this.recipe._id"
 			ref="inviteModal" 
 		/>
+		<SuccessModal ref="successModal">
+			Your changes we're saved successfully.
+		</SuccessModal>
 	</div>
 </template>
 
@@ -282,6 +285,7 @@ import ABVHelper from '../../helpers/abv-helper';
 import EBCHelper from '../../helpers/ebc-helper';
 import IBUHelper from '../../helpers/ibu-helper';
 import InviteModal from '../../components/UI/InviteModal';
+import SuccessModal from '../../components/UI/SuccessModal';
 import EBCBadge from '../../components/UI/EBCBadge';
 import moment from 'moment';
 
@@ -292,6 +296,7 @@ export default {
 		RepeaterField,
 		AutoComplete,
 		InviteModal,
+		SuccessModal,
 		PageError,
 		PageLoader
 	},
@@ -361,7 +366,7 @@ export default {
 			RecipeRepository.update(this.recipe, this.recipe._id)
 				.then(() => {
 
-					alert('recipe saved');
+					this.$refs.successModal.showModal();
 				}).catch(() => {
 
 					document.dispatchEvent(

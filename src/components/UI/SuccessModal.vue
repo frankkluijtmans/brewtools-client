@@ -6,26 +6,22 @@
         <div 
             class="Modal"
         >
-            <i class="fa fa-exclamation-circle ModalIcon" />
-            <h2 class="ModalTitle">Are you sure?</h2>
+            <i class="fa fa-check-circle ModalIcon Success" />
+            <h2 class="ModalTitle">All done!</h2>
             <p class="ModalText">
                 <slot />
             </p>
             <button 
                 @click="fireEvent('modal_confirmed')"
                 class="Button Blue"
-            >Confirm</button>
-            <button 
-                @click="fireEvent('modal_canceled')"
-                class="Button"
-            >Cancel</button>
+            >OK</button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'ConfirmModal',
+    name: 'SuccessModal',
     data() {
         return {
             show: false
@@ -42,18 +38,12 @@ export default {
 
             this.show = true;
 
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 
                 document.addEventListener('modal_confirmed', () => {
                     
                     this.show = false;
                     resolve();
-                })
-
-                document.addEventListener('modal_canceled', () => {
-                    
-                    this.show = false;
-                    reject();
                 })
             })
         }

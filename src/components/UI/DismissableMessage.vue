@@ -41,7 +41,7 @@ export default {
             return;
         }
 
-        return shouldShow;
+        this.show = shouldShow === 'true';
     },
     methods: {
 
