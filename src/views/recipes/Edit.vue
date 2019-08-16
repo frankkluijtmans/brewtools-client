@@ -254,7 +254,15 @@
 						type="submit" 
 						class="Button Brown FullWidth"
 					>
-						Save recipe
+						<span 
+							v-if="updating"
+							class="Animation Flash"
+						>
+							Saving
+						</span>
+						<span v-else>
+							Save recipe
+						</span>
 					</button>
 
 				</div>
@@ -305,6 +313,7 @@ export default {
 			recipe: {},
 			loaded: false,
 			error: false,
+			updating: false,
 			schemas: FieldSchema
 		}
 	},
@@ -360,12 +369,14 @@ export default {
 
 		handleSubmit() {
 
+			this.updating = true;
 			this.recipe.ebc = this.calculatedEbc;
 			this.recipe.ibu = this.calculatedIbu;
 
 			RecipeRepository.update(this.recipe, this.recipe._id)
 				.then(() => {
 
+					this.updating = false;
 					this.$refs.successModal.showModal();
 				}).catch(() => {
 
@@ -395,6 +406,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	@import '../../styles/_animations';
+
 	.LastEdited {
 		margin: -10px 0 25px;
 

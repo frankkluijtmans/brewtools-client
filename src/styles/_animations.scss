@@ -1,0 +1,22 @@
+.Animation {
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    
+    &.Flash {
+        animation-name: flash;
+    }
+}
+
+@keyframes flash {
+    from,
+    50%,
+    to {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
