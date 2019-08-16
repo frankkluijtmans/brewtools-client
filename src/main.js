@@ -3,8 +3,12 @@ import App from './App.vue'
 import router from './router'
 import VueKeyCloak from '@dsb-norge/vue-keycloak-js'
 import axios from 'axios'
+import VueApexCharts from 'vue-apexcharts'
 
 Vue.config.productionTip = false
+
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
 
 function tokenInterceptor () {
 	axios.interceptors.request.use(config => {

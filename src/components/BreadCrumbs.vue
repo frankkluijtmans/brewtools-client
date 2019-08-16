@@ -3,7 +3,6 @@
         <span 
             v-for="page in currentPath" 
             :key="page.name"
-            :class="page.name === 'Dashboard' ? 'Light' : ''"
         >
             <router-link :to=page.path>
                 {{ page.name }}
@@ -43,13 +42,6 @@ export default {
             a {
                 color: $semidark-color;
                 text-decoration: none;
-            }
-
-            &.Light {
-
-                a {
-                    color: $light-color;
-                }
             }
 
             &:before {

@@ -85,23 +85,38 @@ export default {
 
 	.DashboardStats {
 
+		display: flex;
+		flex-direction: column;
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
+
+		@include Breakpoint(Large, ExtraLarge) {
+			flex-direction: row;
+		}
 
 		li {
 			position: relative;
 			overflow: hidden;
 
+			flex: 0 0 32%;
+
 			padding: 15px 15px 45px;
-			margin-bottom: 25px;
+			margin: 0 0 20px 0;
 
 			background: $white;
 			border-radius: 5px;
             @include shadow();
+			@include gradient(#773f19, #a26a44);
+
+			color: $white;
+
+			@include Breakpoint(Large, ExtraLarge) {
+				margin: 0 2% 20px 0;
+			}
             
             &:last-child {
-                margin-bottom: 0;
+                margin-right: 0;
             }
 
 			span {
@@ -118,7 +133,7 @@ export default {
 				padding: 8px 15px;
 				margin-top: 10px;
 
-				@include gradient(#773f19, #a26a44);
+				background: rgba(0,0,0,0.1);
 
 				color: $white;
 				font-size: $SN;
@@ -126,16 +141,12 @@ export default {
 
 			&:first-child {
 
-				footer {
-					@include gradient(#7a7453, #9c956d);
-				}
+				@include gradient(#7a7453, #9c956d);
 			}
 
 			&:last-child {
 
-				footer {
-					@include gradient(#afc40c, #c6db20);
-				}
+				@include gradient(#afc40c, #c6db20);
 			}
 		}
 	}

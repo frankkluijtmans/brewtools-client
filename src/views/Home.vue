@@ -1,12 +1,8 @@
 <template>
 	<div>
-		<div class="HeroUnit">
-			<div class="Content">
-				<h1>Welcome back {{ username }}!</h1>
-				<p>
-					Have you used Brewtools before? It's the easiest way to file your recipes
-					and log your brewing sessions. Start right now by creating a new recipe.
-				</p>
+		<h1 class="PageTitle">
+			Welcome back {{ username }}!
+			<div class="Actions">
 				<router-link 
 					tag="button" 
 					to="/recipes/new" 
@@ -15,7 +11,8 @@
 					<i class="fa fa-plus" /> Create a new recipe
 				</router-link>
 			</div>
-		</div>
+		</h1>
+		<Stats />
 		<div class="Grid">
 
 			<div class="MainContent">
@@ -23,7 +20,7 @@
 			</div>
 
 			<div class="Sidebar Last">
-				<Stats />
+				<AtAGlance />
 			</div>
 		
 		</div>
@@ -33,12 +30,14 @@
 <script>
 import RecipeRepository from '../repositories/recipe-repository';
 import Invites from '../components/Dashboard/Invites';
+import AtAGlance from '../components/Dashboard/AtAGlance';
 import Stats from '../components/Dashboard/Stats';
 
 export default {
 	name: 'home',
 	components: {
 		Invites,
+		AtAGlance,
 		Stats
 	},
 	data() {
@@ -108,20 +107,9 @@ export default {
 	.HeroUnit {
 		position: relative;
 
-		display: flex;
-		align-items: flex-end;
-		width: calc(100% + 50px);
-		margin: -60px 0 25px -25px;
-		height: 420px;
-		padding: 35px 25px;
-
-		background: url('../assets/hero_unit_bg.jpg') no-repeat center center;
-		background-size: cover;
-
 		.Content {
 			width: 100%;
-
-			color: $white;
+			margin-bottom: 50px;
 
 			@include Breakpoint(Large) {
 				width: 80%;
@@ -136,7 +124,7 @@ export default {
 			}
 
 			h1 {
-				margin: 0;
+				margin: 20px 0;
 
 				font-size: $XL;
 
