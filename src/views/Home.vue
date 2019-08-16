@@ -12,7 +12,16 @@
 				</router-link>
 			</div>
 		</h1>
-		<Stats />
+		<DismissableMessage
+			:identifier="'dashboard_intro'"
+		>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+			Donec tincidunt massa ullamcorper felis pharetra hendrerit eget vitae ex. 
+			Morbi dictum nisi mi, mollis ultrices ante convallis id. Sed bibendum suscipit 
+			elementum. Aenean iaculis, sem et ultricies vestibulum, velit urna aliquet quam, 
+			nec consectetur ligula enim quis mauris.
+		</DismissableMessage>
+		<Stats :recipes="recipes" />
 		<div class="Grid">
 
 			<div class="MainContent">
@@ -20,7 +29,19 @@
 			</div>
 
 			<div class="Sidebar Last">
-				<AtAGlance />
+				<div class="TableContainer Blue">
+					<header>
+						<i class="fa fa-bar-chart"></i>
+						Recipe breakdown
+					</header>
+					<EmptyTable v-if="recipes.length === 0">
+						You don't have any recipes yet.
+					</EmptyTable>
+					<RecipeBreakdown 
+						v-else
+						:recipes="recipes" 
+					/>
+				</div>
 			</div>
 		
 		</div>
@@ -30,15 +51,19 @@
 <script>
 import RecipeRepository from '../repositories/recipe-repository';
 import Invites from '../components/Dashboard/Invites';
-import AtAGlance from '../components/Dashboard/AtAGlance';
+import RecipeBreakdown from '../components/Dashboard/RecipeBreakdown';
 import Stats from '../components/Dashboard/Stats';
+import DismissableMessage from '../components/UI/DismissableMessage';
+import EmptyTable from '../components/UI/EmptyTable';
 
 export default {
 	name: 'home',
 	components: {
 		Invites,
-		AtAGlance,
-		Stats
+		RecipeBreakdown,
+		Stats,
+		DismissableMessage,
+		EmptyTable
 	},
 	data() {
 		return {

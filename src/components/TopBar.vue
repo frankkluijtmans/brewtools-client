@@ -96,9 +96,10 @@ export default {
 		}
 
 		#menu-toggle {
+			display: flex;
+			align-items: center;
 			margin: 0 10px 0 auto;
 			
-			line-height: 62px;
 			font-size: $XL;
 			color: $dark-color;
 

@@ -1,14 +1,22 @@
 <template>
     <ul class="DashboardStats">
         <li>
+			<i class="fa fa-line-chart"></i>
             <span>{{ createdRecipes }}</span>
             <footer>Total recipes created</footer>
         </li>
+		<li>
+			<i class="fa fa-line-chart"></i>
+            <span>{{ sharedRecipes }}</span>
+            <footer>Total recipes shared</footer>
+        </li>
         <li>
+			<i class="fa fa-line-chart"></i>
             <span>{{ averageRecipeEBC }}</span>
             <footer>Average recipe EBC</footer>
         </li>
         <li>
+			<i class="fa fa-line-chart"></i>
             <span>{{ averageRecipeIBU }}</span>
             <footer>Average recipe IBU</footer>
         </li>
@@ -16,15 +24,14 @@
 </template>
 
 <script>
-import RecipeRepository from '../../repositories/recipe-repository';
-
 export default {
 	name: 'Stats',
-	data() {
-		return {
-			recipes: []
-		}
-	},
+	props: {
+        recipes: {
+            type: Array,
+            default: () => []
+        }
+    },
 	computed: {
 
 		username: function () {
@@ -34,6 +41,10 @@ export default {
 		createdRecipes: function() {
 
 			return this.recipes.filter(recipe => recipe.owner.email === this.$keycloak.userName).length;
+		},
+		sharedRecipes: function() {
+
+			return this.recipes.filter(recipe => recipe.owner.email !== this.$keycloak.userName).length;
 		},
 		averageRecipeEBC: function() {
 
@@ -67,14 +78,6 @@ export default {
 
 			return 0;
 		},
-	},
-	mounted() {
-			
-		RecipeRepository.getAll()
-			.then(response => {
-				
-				this.recipes = response;
-			})
 	}
 }
 </script>
@@ -99,7 +102,7 @@ export default {
 			position: relative;
 			overflow: hidden;
 
-			flex: 0 0 32%;
+			flex: 1;
 
 			padding: 15px 15px 45px;
 			margin: 0 0 20px 0;
@@ -107,17 +110,26 @@ export default {
 			background: $white;
 			border-radius: 5px;
             @include shadow();
-			@include gradient(#773f19, #a26a44);
+			@include gradient($primary-color, $secondary-color);
 
 			color: $white;
 
 			@include Breakpoint(Large, ExtraLarge) {
-				margin: 0 2% 20px 0;
+				margin: 0 20px 20px 0;
 			}
             
             &:last-child {
                 margin-right: 0;
-            }
+			}
+			
+			i {
+				position: absolute;
+				top: 0;
+				right: -12px;
+
+				color: #f4c93a;
+				font-size: 5rem;
+			}
 
 			span {
 				font-size: $XXL;
@@ -137,16 +149,6 @@ export default {
 
 				color: $white;
 				font-size: $SN;
-			}
-
-			&:first-child {
-
-				@include gradient(#7a7453, #9c956d);
-			}
-
-			&:last-child {
-
-				@include gradient(#afc40c, #c6db20);
 			}
 		}
 	}
